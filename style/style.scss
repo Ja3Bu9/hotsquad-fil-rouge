@@ -1,0 +1,642 @@
+body {
+    // position: relative;
+    // overflow-x: hidden;
+    color: #a0a7ab;
+    background-color: #181c23;
+    margin: 0;
+   
+
+}
+
+body .bg-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.logofilrouge{
+    width:270px
+}
+.logbar {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    // 
+    /*Trigger Button*/
+    .login-trigger {
+        
+        color: #fff;
+        background-color: black;
+        border: 1px solid transparent;
+        border-color: white;
+        border-radius: 7px;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: .5px;
+        padding: 5px 32px;
+        text-transform: uppercase;
+        line-height: 24px;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 1px;
+        
+        margin-right: 10px;
+    }
+
+    .signup-trigger {
+        color: black;
+        background-color: white;
+        border: 1px solid transparent;
+        border-color: black;
+        border-radius: 7px;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: .5px;
+        padding: 5px 32px;
+        text-transform: uppercase;
+        line-height: 24px;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 1px;
+        
+        margin-right: 10px;
+    }
+
+    // /*Modal*/
+    h4 {
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .close {
+        color: white;
+    }
+
+    .modal-content {
+        font-weight: bold;
+        background-color: #292E38;
+        
+        border-radius: 5px;
+
+        h4 span{
+            color: #EF8219;
+        }
+       
+    }
+
+    .form-control {
+        margin: 1em 0;
+        color: white;
+    }
+
+    .form-control:hover,
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #fff;
+    }
+    
+
+    .username,
+    .password {
+        border: none;
+        border-radius: 10;
+        box-shadow: none;
+        padding-left: 0;
+        font-weight: normal;
+        background: #576173;
+    }
+
+    .form-control::-webkit-input-placeholder {
+        color: #79879F;
+    }
+
+    .form-control:focus::-webkit-input-placeholder {
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .login {
+        padding: 6px 20px;
+        border-radius: 10px;
+        background: #D5D5D5;
+        border: none;
+        color: black;
+        font-weight: bold;
+        transition: all .5s;
+        margin-top: 1em;
+        width: 40%;
+    }
+
+    .login:hover {
+        background: #576173;
+        color: #fff;
+    }
+
+}
+
+.logobar {
+    
+    background-color: black;
+    height: 8em;
+    width: 100%;
+}
+
+.advertise {
+    .advertiseimg {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        background-image: url('../img/fortnite.jpg');
+        background-size: cover;
+        background-position: top;
+        ;
+
+        width: 100%;
+        height: 60vh;
+        border-radius: 15px;
+        box-shadow: 0px 0px 60px -12px rgba(255, 255, 255, 1);
+    }
+}
+.sessionuser{
+    font-size:30px;color: white; margin-top: 5px;
+}
+
+.titles {
+    margin-top: 3em;
+    margin-bottom: 4em;
+
+    h1 {
+        font-weight: 700;
+        color: white;
+    }
+
+    span {
+        color: #EF8219;
+    }
+}
+
+.populars {
+    a{
+        text-decoration: none;
+        margin: 10px;
+    }
+    div {
+        position: relative;
+        width: 250px;
+        height: 200px;
+        background-position: top;
+        background-size: cover;
+        border-radius: 10px;
+    }
+
+    div::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(0, 18, 18);
+        background: linear-gradient(0deg, rgba(0, 18, 18, 1) 0%, rgba(0, 0, 0, 0.5270483193277311) 55%, rgba(0, 0, 0, 0.10407913165266103) 100%);
+        border-radius: 10px;
+        box-shadow: 0px 0px 60px -12px white;
+    
+    }
+
+    p {
+        position: relative;
+        color: white;
+        font-size: 28px;
+        top: 120px;
+        text-align: center;
+        max-height: 84px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.logbar .userpic{
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 5px;
+    background-position: top;
+    background-size: cover;
+    border-radius: 50px;
+    border: 3px solid #4F596C;
+
+}
+.bg{
+    background-color: #2F3541;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 1.5em;
+
+    h1 {
+        color: white;
+        font-size: 18px;
+        margin: 0;
+    }
+    hr{
+        background-color:rgb(255, 255, 255);height:0.2em;width:100%;margin: 0;
+    }
+    .postt{
+        cursor: pointer;
+    }
+     .row a {
+        color: white;
+    }
+    .row button{
+        color: white;
+        background-color: transparent; border: none;
+    }
+
+    .row button:hover{
+        color: #79879F;
+
+    }
+    
+     .row a:hover {
+        color: #79879F;
+    }
+
+    .postcontent {
+        font-size: 26px;
+        width: 100%;
+        color: white;
+    }
+
+    .postpic{
+        width: 95%;
+        border-radius: 0.5em;
+    }
+    .engag a, .engag button{
+        text-decoration: none;
+        margin: 0em;
+        margin-top: 0.5em;
+        margin-bottom: 0.3em;
+    }
+
+    .engag .fas, .engag .fa, .engag .material-icons{
+        font-size:2em;
+         margin-right: 0.2em;
+    }
+
+    .catpic, .userpic{
+        width: 50px;
+        height: 50px;
+        background-position: top;
+        background-size: cover;
+        border-radius: 50px;
+    }
+
+    .subcomment{
+        width: 30%;margin-right: 4.1%; background-color:#D5D5D5 ; height: 3.5vh;
+    }
+
+    .userpicture{
+        width: 120px;
+        height: 120px;
+        background-position: top;
+        background-size: cover;
+        border-radius: 5px;
+        border: 3px solid #4F596C;
+    }
+   
+    
+}
+
+.categ{
+    
+    a{
+        font-size: 16px; text-decoration: none;
+    }
+
+    hr {
+        background-color:rgba(255, 255, 255, 0.299);height:0.2px;width:100%;margin: 0;
+    
+    }
+
+    .catpic{
+        margin: 10px;
+        margin-left: 25%;
+        
+    }
+
+    .viewall{
+        text-decoration: none;
+        color: black;
+        font-size: 12px;
+        background-color: #D5D5D5;
+        margin-top: 5px;
+        padding: 8px;
+        font-weight: 500;
+        padding-left: 100px;
+        padding-right: 100px;
+        border-radius: 10px;
+        transition: all .5s;
+
+    }
+
+    .viewall:hover{
+        background-color: #2F3541;
+    }
+}
+
+
+
+input, #categ{
+    background-color: #576173;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+input::placeholder{
+    color: #79879F;
+    font-size: 18px;
+    padding-left: 8%;
+}
+
+.creat input{
+    width: 95%;
+    height: 40px;
+    margin: 5px;
+}
+
+.image-upload>input {
+    display: none;
+  }
+
+  .creat form {
+      width: 100%;
+  }
+
+  .profile{
+        h6{
+            margin-left: 10px;
+        }
+
+        .userpicture , h3 , h5{
+            margin-left: 15px;
+        }
+
+        .datesince{
+            position: absolute;
+            bottom: 0;
+            // right: -50%;
+        }
+
+  }
+
+  
+ @media(max-width:1200px){
+    .profile{
+        h6{
+            margin-left: 20px;
+        }
+
+        .userpicture , h3 , h5{
+            margin-left: 15px;
+        }
+        h5{
+            font-size: 14px;
+        }
+
+        .datesince{
+            position: absolute;
+            bottom: 0;
+            // right: -40%;
+            
+        }
+
+  }
+ }
+
+  @media(max-width : 995px){
+
+    .col-8, .col-4{
+        flex: 100%;
+    max-width: 100%;
+    }
+    .advertise .advertiseimg {
+        height: 40vh;
+    }
+  }
+
+
+  @media(max-width : 770px){
+    .advertise .advertiseimg {
+        height: 30vh;
+    }
+    .titles h1{
+        font-size: 22px;
+    }
+    
+  }
+
+  @media(max-width : 426px){
+    .advertise .advertiseimg {
+        height: 25vh;
+    }
+    .postt .col-11{
+        padding-right: 0;
+        flex: 100%;
+    max-width: 100%;
+    }
+    .titles h1{
+        font-size: 16px;
+    }
+    .logofilrouge{
+        width:200px
+    }
+    .titles {
+        margin-top: 1em;
+        margin-bottom: 2em;
+    }
+    .titles h1{
+        font-size: 18px;
+    }
+    .titles .hr{
+        max-width: 27%;
+    }
+    .creat .col-11 {
+        -ms-flex: 0 0 91.666667%;
+        flex: 100%;
+        max-width: 80%;
+    }
+    .bg{
+
+         .engag .fas, .engag .fa, .engag .material-icons{
+            font-size:1em;
+             margin-right: 0.2em;
+        }
+         .postcontent {
+            font-size: 18px;
+        }
+        h3{
+            font-size: 16px;
+        }
+        span{
+            font-size: 10px;
+        }
+
+
+    }
+
+    .logbar .login-trigger,.logbar .signup-trigger {
+        
+
+            
+            border-radius: 7px;
+            text-align: center;
+            font-size: 8px;
+            letter-spacing: .5px;
+            padding: 0px 20px;
+            margin-top: 10px;
+            margin-right: 10px;
+        
+    }
+    .sessionuser{
+        font-size: 22px;
+    }
+    
+  }
+
+
+  .logobarback{
+      background-color: #2F3541;
+      width: 100%;
+    height: 8em;
+
+  }
+
+  .containerback{
+      color: white;
+      
+      .backusers, .backposts, .backcomts,.backcats{
+          height: 80px;
+          border-bottom: 2px solid rgba(255, 255, 255, 0.265);
+      }
+      i{
+        font-size:32px;
+        padding-left: 2vw;
+      }
+      h4{
+          padding-left: 12px;
+      }
+      a{
+          color: white;
+        width: 100%;
+        outline: none;
+        text-decoration: none;
+
+      }
+      a:hover{
+          background: #576173;
+          color: black;
+      }
+
+      
+      
+  }
+
+  .bgback{
+    background-color: #2F3541;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 2em;
+    hr{
+        background-color:rgb(255, 255, 255);height:0.2em;width:100%;margin: 0;
+    }
+  }
+
+
+  //table  
+  .table{
+        
+    tbody tr:nth-child(even) {
+        background-color: #576173;
+      }
+      color: white;
+      i{
+        font-size: 20px;
+        padding: 0;
+        color: white;
+    }
+    i:hover{
+        color: rgba(245, 67, 67, 0.678)
+    }
+    .fa-edit:hover{
+        color: greenyellow;
+    }
+    span{
+        padding-left: 10px;
+    }
+    td,th{
+        text-align: center;
+    }
+    
+  }
+
+  
+
+ 
+  .nobackoffice{
+      display: none;
+      color: white;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      height: 80vh;
+
+  }
+ 
+  table.dataTable tbody tr{
+      background-color: transparent;
+  }
+  .dataTables_paginate{
+      display: flex;
+      color: white !important;
+      span{
+          display: flex;
+          a{
+          background-color: rgba(255, 255, 255, 0.306);
+
+          }
+      }
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button ,.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+      color: white !important;
+  }
+
+
+
+
+
+
+
+
+
+
+  @media(max-width:1000px){
+    .backoffice{
+        display: none;
+    }
+    .nobackoffice{
+        display: flex;
+    }
+  }
+
+
+  #profileres, #passwres{
+      color: red;
+      font-weight: 500;
+  }
+
+  #imgsuccess{
+    color: springgreen;;
+    font-weight: 500;
+  }

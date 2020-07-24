@@ -1,0 +1,643 @@
+body {
+  color: #a0a7ab;
+  background-color: #181c23;
+  margin: 0;
+}
+
+body .bg-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: -1;
+}
+
+.logofilrouge {
+  width: 270px;
+}
+
+.logbar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /*Trigger Button*/
+}
+
+.logbar .login-trigger {
+  color: #fff;
+  background-color: black;
+  border: 1px solid transparent;
+  border-color: white;
+  border-radius: 7px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: .5px;
+  padding: 5px 32px;
+  text-transform: uppercase;
+  line-height: 24px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 1px;
+  margin-right: 10px;
+}
+
+.logbar .signup-trigger {
+  color: black;
+  background-color: white;
+  border: 1px solid transparent;
+  border-color: black;
+  border-radius: 7px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: .5px;
+  padding: 5px 32px;
+  text-transform: uppercase;
+  line-height: 24px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 1px;
+  margin-right: 10px;
+}
+
+.logbar h4 {
+  font-weight: bold;
+  color: #fff;
+}
+
+.logbar .close {
+  color: white;
+}
+
+.logbar .modal-content {
+  font-weight: bold;
+  background-color: #292E38;
+  border-radius: 5px;
+}
+
+.logbar .modal-content h4 span {
+  color: #EF8219;
+}
+
+.logbar .form-control {
+  margin: 1em 0;
+  color: white;
+}
+
+.logbar .form-control:hover,
+.logbar .form-control:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-color: #fff;
+}
+
+.logbar .username,
+.logbar .password {
+  border: none;
+  border-radius: 10;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding-left: 0;
+  font-weight: normal;
+  background: #576173;
+}
+
+.logbar .form-control::-webkit-input-placeholder {
+  color: #79879F;
+}
+
+.logbar .form-control:focus::-webkit-input-placeholder {
+  font-weight: bold;
+  color: #fff;
+}
+
+.logbar .login {
+  padding: 6px 20px;
+  border-radius: 10px;
+  background: #D5D5D5;
+  border: none;
+  color: black;
+  font-weight: bold;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  margin-top: 1em;
+  width: 40%;
+}
+
+.logbar .login:hover {
+  background: #576173;
+  color: #fff;
+}
+
+.logobar {
+  background-color: black;
+  height: 8em;
+  width: 100%;
+}
+
+.advertise .advertiseimg {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  background-image: url("../img/fortnite.jpg");
+  background-size: cover;
+  background-position: top;
+  width: 100%;
+  height: 60vh;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 0px 60px -12px white;
+          box-shadow: 0px 0px 60px -12px white;
+}
+
+.sessionuser {
+  font-size: 30px;
+  color: white;
+  margin-top: 5px;
+}
+
+.titles {
+  margin-top: 3em;
+  margin-bottom: 4em;
+}
+
+.titles h1 {
+  font-weight: 700;
+  color: white;
+}
+
+.titles span {
+  color: #EF8219;
+}
+
+.populars a {
+  text-decoration: none;
+  margin: 10px;
+}
+
+.populars div {
+  position: relative;
+  width: 250px;
+  height: 200px;
+  background-position: top;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.populars div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #001212;
+  background: -webkit-gradient(linear, left bottom, left top, from(#001212), color-stop(55%, rgba(0, 0, 0, 0.527048)), to(rgba(0, 0, 0, 0.104079)));
+  background: linear-gradient(0deg, #001212 0%, rgba(0, 0, 0, 0.527048) 55%, rgba(0, 0, 0, 0.104079) 100%);
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 60px -12px white;
+          box-shadow: 0px 0px 60px -12px white;
+}
+
+.populars p {
+  position: relative;
+  color: white;
+  font-size: 28px;
+  top: 120px;
+  text-align: center;
+  max-height: 84px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logbar .userpic {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 5px;
+  background-position: top;
+  background-size: cover;
+  border-radius: 50px;
+  border: 3px solid #4F596C;
+}
+
+.bg {
+  background-color: #2F3541;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 1.5em;
+}
+
+.bg h1 {
+  color: white;
+  font-size: 18px;
+  margin: 0;
+}
+
+.bg hr {
+  background-color: white;
+  height: 0.2em;
+  width: 100%;
+  margin: 0;
+}
+
+.bg .postt {
+  cursor: pointer;
+}
+
+.bg .row a {
+  color: white;
+}
+
+.bg .row button {
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+
+.bg .row button:hover {
+  color: #79879F;
+}
+
+.bg .row a:hover {
+  color: #79879F;
+}
+
+.bg .postcontent {
+  font-size: 26px;
+  width: 100%;
+  color: white;
+}
+
+.bg .postpic {
+  width: 95%;
+  border-radius: 0.5em;
+}
+
+.bg .engag a, .bg .engag button {
+  text-decoration: none;
+  margin: 0em;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+.bg .engag .fas, .bg .engag .fa, .bg .engag .material-icons {
+  font-size: 2em;
+  margin-right: 0.2em;
+}
+
+.bg .catpic, .bg .userpic {
+  width: 50px;
+  height: 50px;
+  background-position: top;
+  background-size: cover;
+  border-radius: 50px;
+}
+
+.bg .subcomment {
+  width: 30%;
+  margin-right: 4.1%;
+  background-color: #D5D5D5;
+  height: 3.5vh;
+}
+
+.bg .userpicture {
+  width: 120px;
+  height: 120px;
+  background-position: top;
+  background-size: cover;
+  border-radius: 5px;
+  border: 3px solid #4F596C;
+}
+
+.categ a {
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.categ hr {
+  background-color: rgba(255, 255, 255, 0.299);
+  height: 0.2px;
+  width: 100%;
+  margin: 0;
+}
+
+.categ .catpic {
+  margin: 10px;
+  margin-left: 25%;
+}
+
+.categ .viewall {
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+  background-color: #D5D5D5;
+  margin-top: 5px;
+  padding: 8px;
+  font-weight: 500;
+  padding-left: 100px;
+  padding-right: 100px;
+  border-radius: 10px;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.categ .viewall:hover {
+  background-color: #2F3541;
+}
+
+input, #categ {
+  background-color: #576173;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+input::-webkit-input-placeholder {
+  color: #79879F;
+  font-size: 18px;
+  padding-left: 8%;
+}
+
+input:-ms-input-placeholder {
+  color: #79879F;
+  font-size: 18px;
+  padding-left: 8%;
+}
+
+input::-ms-input-placeholder {
+  color: #79879F;
+  font-size: 18px;
+  padding-left: 8%;
+}
+
+input::placeholder {
+  color: #79879F;
+  font-size: 18px;
+  padding-left: 8%;
+}
+
+.creat input {
+  width: 95%;
+  height: 40px;
+  margin: 5px;
+}
+
+.image-upload > input {
+  display: none;
+}
+
+.creat form {
+  width: 100%;
+}
+
+.profile h6 {
+  margin-left: 10px;
+}
+
+.profile .userpicture, .profile h3, .profile h5 {
+  margin-left: 15px;
+}
+
+.profile .datesince {
+  position: absolute;
+  bottom: 0;
+}
+
+@media (max-width: 1200px) {
+  .profile h6 {
+    margin-left: 20px;
+  }
+  .profile .userpicture, .profile h3, .profile h5 {
+    margin-left: 15px;
+  }
+  .profile h5 {
+    font-size: 14px;
+  }
+  .profile .datesince {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+@media (max-width: 995px) {
+  .col-8, .col-4 {
+    -webkit-box-flex: 100%;
+        -ms-flex: 100%;
+            flex: 100%;
+    max-width: 100%;
+  }
+  .advertise .advertiseimg {
+    height: 40vh;
+  }
+}
+
+@media (max-width: 770px) {
+  .advertise .advertiseimg {
+    height: 30vh;
+  }
+  .titles h1 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 426px) {
+  .advertise .advertiseimg {
+    height: 25vh;
+  }
+  .postt .col-11 {
+    padding-right: 0;
+    -webkit-box-flex: 100%;
+        -ms-flex: 100%;
+            flex: 100%;
+    max-width: 100%;
+  }
+  .titles h1 {
+    font-size: 16px;
+  }
+  .logofilrouge {
+    width: 200px;
+  }
+  .titles {
+    margin-top: 1em;
+    margin-bottom: 2em;
+  }
+  .titles h1 {
+    font-size: 18px;
+  }
+  .titles .hr {
+    max-width: 27%;
+  }
+  .creat .col-11 {
+    -ms-flex: 0 0 91.666667%;
+    -webkit-box-flex: 100%;
+            flex: 100%;
+    max-width: 80%;
+  }
+  .bg .engag .fas, .bg .engag .fa, .bg .engag .material-icons {
+    font-size: 1em;
+    margin-right: 0.2em;
+  }
+  .bg .postcontent {
+    font-size: 18px;
+  }
+  .bg h3 {
+    font-size: 16px;
+  }
+  .bg span {
+    font-size: 10px;
+  }
+  .logbar .login-trigger, .logbar .signup-trigger {
+    border-radius: 7px;
+    text-align: center;
+    font-size: 8px;
+    letter-spacing: .5px;
+    padding: 0px 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  .sessionuser {
+    font-size: 22px;
+  }
+}
+
+.logobarback {
+  background-color: #2F3541;
+  width: 100%;
+  height: 8em;
+}
+
+.containerback {
+  color: white;
+}
+
+.containerback .backusers, .containerback .backposts, .containerback .backcomts, .containerback .backcats {
+  height: 80px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.265);
+}
+
+.containerback i {
+  font-size: 32px;
+  padding-left: 2vw;
+}
+
+.containerback h4 {
+  padding-left: 12px;
+}
+
+.containerback a {
+  color: white;
+  width: 100%;
+  outline: none;
+  text-decoration: none;
+}
+
+.containerback a:hover {
+  background: #576173;
+  color: black;
+}
+
+.bgback {
+  background-color: #2F3541;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 2em;
+}
+
+.bgback hr {
+  background-color: white;
+  height: 0.2em;
+  width: 100%;
+  margin: 0;
+}
+
+.table {
+  color: white;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #576173;
+}
+
+.table i {
+  font-size: 20px;
+  padding: 0;
+  color: white;
+}
+
+.table i:hover {
+  color: rgba(245, 67, 67, 0.678);
+}
+
+.table .fa-edit:hover {
+  color: greenyellow;
+}
+
+.table span {
+  padding-left: 10px;
+}
+
+.table td, .table th {
+  text-align: center;
+}
+
+.nobackoffice {
+  display: none;
+  color: white;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 80vh;
+}
+
+table.dataTable tbody tr {
+  background-color: transparent;
+}
+
+.dataTables_paginate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: white !important;
+}
+
+.dataTables_paginate span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dataTables_paginate span a {
+  background-color: rgba(255, 255, 255, 0.306);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+  color: white !important;
+}
+
+@media (max-width: 1000px) {
+  .backoffice {
+    display: none;
+  }
+  .nobackoffice {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+#profileres, #passwres {
+  color: red;
+  font-weight: 500;
+}
+
+#imgsuccess {
+  color: springgreen;
+  font-weight: 500;
+}
+/*# sourceMappingURL=style.css.map */

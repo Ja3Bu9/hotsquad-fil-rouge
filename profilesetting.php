@@ -310,31 +310,33 @@ if(!isset($_SESSION["username"])){
                         </div>
                     </div>
                     <div class="bg categ" style="padding-bottom: 10px; margin: 0;background-color: #292E38;">
+
+                    <?php 
+                        $sqlcat = "SELECT * FROM category";
+                        $resultcat = $conn->query($sqlcat);
+                        $i = 1;
+
+                        
+                        while($categ = $resultcat->fetch_assoc() ) {
+                            if($i == 5){
+                            break;
+                            }
+                                                ?>
                         <div class="row  d-flex justify-content-start align-items-center">
                             <!-- <img class="catpic" src="" alt="pubg"> -->
-                            <div class="catpic " style="background-image: url('https://pic.clubic.com/v1/images/1801039/raw-accept?width=1200&fit=max&hash=aad793c5528226925ef8ce8c99bd28baa3a11c65');"></div>
-                            <a href="category.php"  >PUBG</a>
+                            <div class="catpic " style="background-image: url('upload/categorys/<?php echo $categ['photo'] ?>');"></div>
+                            <a href="category.php?idcateg=<?php echo $categ['id'] ?>" > <?php echo $categ['name'] ?></a>
 
                         </div>
-                        <hr><div class="row  d-flex justify-content-start align-items-center">
-                            <!-- <img class="catpic" src="" alt="pubg"> -->
-                            <div class="catpic " style="background-image: url('https://pic.clubic.com/v1/images/1801039/raw-accept?width=1200&fit=max&hash=aad793c5528226925ef8ce8c99bd28baa3a11c65');"></div>
-                            <a href="category.php" >PUBG</a>
+                        <hr>
 
-                        </div>
-                        <hr><div class="row  d-flex justify-content-start align-items-center">
-                            <!-- <img class="catpic" src="" alt="pubg"> -->
-                            <div class="catpic " style="background-image: url('https://pic.clubic.com/v1/images/1801039/raw-accept?width=1200&fit=max&hash=aad793c5528226925ef8ce8c99bd28baa3a11c65');"></div>
-                            <a href="category.php" >PUBG</a>
-
-                        </div>
-                        <hr><div class="row  d-flex justify-content-start align-items-center">
-                            <!-- <img class="catpic" src="" alt="pubg"> -->
-                            <div class="catpic " style="background-image: url('https://pic.clubic.com/v1/images/1801039/raw-accept?width=1200&fit=max&hash=aad793c5528226925ef8ce8c99bd28baa3a11c65');"></div>
-                            <a href="category.php">PUBG</a>
-
-                        </div>
-                        <div class="d-flex justify-content-center"><a href="categories.php" class="viewall " >VIEW ALL</a></div>
+                        <?php
+                    $i++; }
+                    ?>
+                        <div class="d-flex justify-content-center"><a href="categories.php" class="viewall" >VIEW ALL</a></div>
+                        
+                        
+                   
                         
                         
                     </div>

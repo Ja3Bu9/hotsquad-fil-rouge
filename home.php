@@ -176,7 +176,7 @@ $user = $result->fetch_assoc();
       while($popu = $resultpopu->fetch_assoc() ) {
         
                  if($popu['photo']){  
-                    if($i == 6){
+                    if($i == 5){
                     break;
                     }                
         ?>
@@ -281,10 +281,16 @@ if(isset($_SESSION["username"])){
                                 $sqlpost = "SELECT post.*, user.id AS user_id, user.photo AS user_photo , user.username AS user_username FROM post JOIN user ON post.user_id = user.id ORDER BY id DESC";
                                 $resultpost = $conn->query($sqlpost);
                                 
+                                
         
                                 
                                 while($post = $resultpost->fetch_assoc() ) {
                                    
+                                    if(isset($_SESSION["id"])){
+                                    $votepost = "SELECT * FROM `voted` WHERE user_id='{$_SESSION['id']}' AND post_id='{$post['id']}'";
+        $resultvote = $conn->query($votepost);
+        $vote =  $resultvote->fetch_assoc();
+                                    }
                                     ?>
                 <!-- post -->
                 <div class="bg">
@@ -292,24 +298,13 @@ if(isset($_SESSION["username"])){
                         <div class="col-1 d-flex flex-column align-items-center"
                             style="padding-left: 3em;padding-top: 0.5em;">
 
-<?php 
-if($_SESSION['id']){
-        $votepost = "SELECT * FROM `voted` WHERE user_id='{$_SESSION['id']}' AND post_id='{$post['id']}'";
-        $resultvote = $conn->query($votepost);
-        $vote =  $resultvote->fetch_assoc();
-    }
-
-?>
 
 
-
-
-
-                            <button aria-pressed="<?php if($_SESSION['id']){if($vote==0){echo'false';} else if($vote['up'] == true){echo'true';}else if($vote['up'] == false){echo'false';}}else{echo'false';}  ?>" onclick="checkup('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this,'<?php echo $_SESSION['id'] ?>')" class="boutn upup"><i class="fa fa-chevron-up"
+                                <button aria-pressed="<?php if(isset($_SESSION["id"])){if($vote==0){echo'false';} else if($vote['up'] == true){echo'true';}else if($vote['up'] == false){echo'false';}}else{echo'false';}  ?>" <?php  if(isset($_SESSION["id"])){ ?> onclick="checkup('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this,'<?php echo $_SESSION['id'] ?>')" <?php } ?> class="boutn upup"><i class="fa fa-chevron-up"
                                     style="font-size:26px"></i></button>
                             <p class="boutn votes" style="font-size: 20px; margin: 0;color: white;"><?php echo $post['upvotes'] - $post['downvotes'] ?></p>
 
-                            <button aria-pressed="<?php if($_SESSION['id']){if($vote==0){echo'false';} else if($vote['down'] == true){echo'true';}else if($vote['down'] == false){echo'false';}}else{echo'false';}  ?>" onclick="checkdown('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this,'<?php echo $_SESSION['id'] ?>')" class="boutn downdown"><i class="fa fa-chevron-down"
+                                <button aria-pressed="<?php if(isset($_SESSION["username"])){if($vote==0){echo'false';} else if($vote['down'] == true){echo'true';}else if($vote['down'] == false){echo'false';}}else{echo'false';}  ?>" <?php  if(isset($_SESSION["username"])){ ?> onclick="checkdown('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this,'<?php echo $_SESSION['id'] ?>')" <?php } ?> class="boutn downdown"><i class="fa fa-chevron-down"
                                     style="font-size:26px"></i></button>
 
                             
@@ -442,6 +437,7 @@ if($_SESSION['id']){
 
 
 
+    <?php if(isset($_SESSION["id"])){ ?>
 
 
 <!-- chenge value of votes -->
@@ -606,25 +602,7 @@ for (let i = 0 ; i<upp.length ; i++){
 
     </script>
 
-
-
-<!-- refering to post link script  -->
-    <script>
-        $(".postt").click(function (e) {
-
-            if (!$(".boutn").is(e.target) //not clicked on .boutn
-                &&
-                $(".boutn").has(e.target).length === 0) //clicked thing is not child of .boutn
-            {
-                window.location = $(this).find("a").attr("href");
-                return false;
-            }
-
-
-        });
-    </script>
-
-
+    
 <!-- show inputs post script  -->
 <script>
     inputs = document.getElementById('formpost');
@@ -647,6 +625,26 @@ for (let i = 0 ; i<upp.length ; i++){
     }
 });
 </script>
+
+<?php } ?>
+
+
+<!-- refering to post link script  -->
+    <script>
+        $(".postt").click(function (e) {
+
+            if (!$(".boutn").is(e.target) //not clicked on .boutn
+                &&
+                $(".boutn").has(e.target).length === 0) //clicked thing is not child of .boutn
+            {
+                window.location = $(this).find("a").attr("href");
+                return false;
+            }
+
+
+        });
+    </script>
+
 
 
 

@@ -190,7 +190,14 @@ if(!isset($_SESSION["username"])){
                 </div>
 
                                 <?php }else { 
-                                    while($post = $resultpost->fetch_assoc() ) {?>
+                                    while($post = $resultpost->fetch_assoc() ) {
+                                        
+                                        if(isset($_SESSION["id"])){
+                                            $votepost = "SELECT * FROM `voted` WHERE user_id='{$_SESSION['id']}' AND post_id='{$post['id']}'";
+                $resultvote = $conn->query($votepost);
+                $vote =  $resultvote->fetch_assoc();
+                                            }
+                                            ?>
 
                                       <!-- post -->
                 <div class="bg">
@@ -198,11 +205,11 @@ if(!isset($_SESSION["username"])){
                     <div class="col-1 d-flex flex-column align-items-center"
                             style="padding-left: 3em;padding-top: 0.5em;">
 
-                            <button aria-pressed="false" onclick="checkup('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this)" class="boutn upup"><i class="fa fa-chevron-up"
+                            <button aria-pressed="<?php if(isset($_SESSION["id"])){if($vote==0){echo'false';} else if($vote['up'] == true){echo'true';}else if($vote['up'] == false){echo'false';}}else{echo'false';}  ?>" <?php  if(isset($_SESSION["id"])){ ?> onclick="checkup('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this,'<?php echo $_SESSION['id'] ?>')" <?php } ?> class="boutn upup"><i class="fa fa-chevron-up"
                                     style="font-size:26px"></i></button>
-                            <p class="boutn votes"  style="font-size: 20px; margin: 0;color: white;"><?php echo $post['upvotes'] - $post['downvotes'] ?></p>
+                            <p class="boutn votes" style="font-size: 20px; margin: 0;color: white;"><?php echo $post['upvotes'] - $post['downvotes'] ?></p>
 
-                            <button aria-pressed="false" onclick="checkdown('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this)" class="boutn downdown"><i class="fa fa-chevron-down"
+                                <button aria-pressed="<?php if(isset($_SESSION["username"])){if($vote==0){echo'false';} else if($vote['down'] == true){echo'true';}else if($vote['down'] == false){echo'false';}}else{echo'false';}  ?>" <?php  if(isset($_SESSION["username"])){ ?> onclick="checkdown('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this,'<?php echo $_SESSION['id'] ?>')" <?php } ?> class="boutn downdown"><i class="fa fa-chevron-down"
                                     style="font-size:26px"></i></button>
 
                             
@@ -386,15 +393,58 @@ if(!isset($_SESSION["username"])){
 
 
 
+    <?php if(isset($_SESSION["id"])){ ?>
+
+
+<!-- chenge value of votes -->
+
+    <script>
+  let upp = $(".upup");
+        let downn = $(".downdown");
+        let votess = $(".votes");
+
+
+for (let i = 0 ; i<upp.length ; i++){
+    if (upp[i].getAttribute("aria-pressed") == "true") {
+
+        upp[i].style.color = "#79879F"  
+
+          
+        }else{
+        upp[i].style.color = "white"
+
+        }
+      
+      }
+
+      for (let i = 0 ; i<downn.length ; i++){
+    if (downn[i].getAttribute("aria-pressed") == "true") {
+        downn[i].style.color = "#79879F"  
+
+          
+        }else{
+        downn[i].style.color = "white"
+
+        }
+      
+      }
+
+      
+
+</script>
+
+
+
+
 
 
 <!-- up / down vote script  -->
-<script>
+    <script>
         let up = $(".upup");
         let down = $(".downdown");
         let votes = $(".votes");
 
-        function checkup(id,upvotes,downvotes,test){
+        function checkup(id,upvotes,downvotes,test, user){
 
             for (let i = 0 ; i<up.length ; i++){
 
@@ -408,7 +458,7 @@ if(!isset($_SESSION["username"])){
                     up[i].setAttribute("aria-pressed", true)
                 up[i].style.color = "#79879F"                
 
-                $.post( 'up.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes }, 
+                $.post( 'up.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
        function( response ) {
         //  alert(response);
         
@@ -430,7 +480,7 @@ if(!isset($_SESSION["username"])){
 
                    votes[i].innerHTML = Number(votes[i].innerHTML) + 2;
 
-                $.post( 'up-down.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes }, 
+                $.post( 'up-down.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
        function( response ) {
         //  alert(response);
        }
@@ -443,7 +493,7 @@ if(!isset($_SESSION["username"])){
                 up[i].setAttribute("aria-pressed", false)
                 up[i].style.color = "white"
                   votes[i].innerHTML = Number(votes[i].innerHTML) - 1;
-                $.post( 'up-.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes }, 
+                $.post( 'up-.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes,user_id : user}, 
        function( response ) {
         //  alert(response);
        }
@@ -457,7 +507,7 @@ if(!isset($_SESSION["username"])){
     
 
         
-        function checkdown(id,upvotes,downvotes, test){
+        function checkdown(id,upvotes,downvotes, test , user){
             for (let i = 0 ; i<down.length ; i++){  
             if (down[i].getAttribute("aria-pressed") == "false") {
                 if(up[i].getAttribute("aria-pressed") == "false"){
@@ -465,7 +515,7 @@ if(!isset($_SESSION["username"])){
                     down[i].setAttribute("aria-pressed", true)
                 down[i].style.color = "#79879F"
                 votes[i].innerHTML = Number(votes[i].innerHTML) - 1;
-                $.post( 'down.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes }, 
+                $.post( 'down.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
        function( response ) {
         //  alert(response);
        }
@@ -479,7 +529,7 @@ if(!isset($_SESSION["username"])){
                 down[i].setAttribute("aria-pressed", true)
                 down[i].style.color = "#79879F"
                 votes[i].innerHTML = Number(votes[i].innerHTML) - 2;
-                $.post( 'down-up.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes }, 
+                $.post( 'down-up.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
        function( response ) {
         //  alert(response);
        }
@@ -493,7 +543,7 @@ if(!isset($_SESSION["username"])){
                 down[i].setAttribute("aria-pressed", false)
                 down[i].style.color = "white"
                 votes[i].innerHTML = Number(votes[i].innerHTML) + 1;
-                $.post( 'down-.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes }, 
+                $.post( 'down-.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
        function( response ) {
         //  alert(response);
        }
@@ -507,6 +557,10 @@ if(!isset($_SESSION["username"])){
 
 
     </script>
+
+    
+
+<?php } ?>
 
 
 

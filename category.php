@@ -28,6 +28,8 @@ require('class.php');
     </script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 
     <link rel="stylesheet" href="style/style.css">
 </head>
@@ -189,7 +191,13 @@ $user = $result->fetch_assoc();
                 </div>
 
                                 <?php }else { 
-                                    while($post = $resultpost->fetch_assoc() ) {?>
+                                    while($post = $resultpost->fetch_assoc() ) {
+                                        if(isset($_SESSION["id"])){
+                                            $votepost = "SELECT * FROM `voted` WHERE user_id='{$_SESSION['id']}' AND post_id='{$post['id']}'";
+                $resultvote = $conn->query($votepost);
+                $vote =  $resultvote->fetch_assoc();
+                                            }
+                                        ?>
 
                                       <!-- post -->
                 <div class="bg">
@@ -197,11 +205,11 @@ $user = $result->fetch_assoc();
                         <div class="col-1 d-flex flex-column align-items-center"
                             style="padding-left: 3em;padding-top: 0.5em;">
 
-                            <button aria-pressed="false" class="boutn upup"><i class="fa fa-chevron-up"
+                            <button aria-pressed="<?php if(isset($_SESSION["id"])){if($vote==0){echo'false';} else if($vote['up'] == true){echo'true';}else if($vote['up'] == false){echo'false';}}else{echo'false';}  ?>" <?php  if(isset($_SESSION["id"])){ ?> onclick="checkup('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this,'<?php echo $_SESSION['id'] ?>')" <?php } ?> class="boutn upup"><i class="fa fa-chevron-up"
                                     style="font-size:26px"></i></button>
-                            <p class="boutn" style="font-size: 20px; margin: 0;color: white;"><?php echo $post['upvotes'] - $post['downvotes'] ?></p>
+                            <p class="boutn votes" style="font-size: 20px; margin: 0;color: white;"><?php echo $post['upvotes'] - $post['downvotes'] ?></p>
 
-                            <button aria-pressed="false" class="boutn downdown"><i class="fa fa-chevron-down"
+                                <button aria-pressed="<?php if(isset($_SESSION["username"])){if($vote==0){echo'false';} else if($vote['down'] == true){echo'true';}else if($vote['down'] == false){echo'false';}}else{echo'false';}  ?>" <?php  if(isset($_SESSION["username"])){ ?> onclick="checkdown('<?php echo $post['id'] ?>','<?php echo $post['upvotes'] ?>','<?php echo $post['downvotes'] ?>', this,'<?php echo $_SESSION['id'] ?>')" <?php } ?> class="boutn downdown"><i class="fa fa-chevron-down"
                                     style="font-size:26px"></i></button>
 
                             
@@ -375,71 +383,175 @@ $user = $result->fetch_assoc();
 
 
 
+    <?php if(isset($_SESSION["id"])){ ?>
+
+
+<!-- chenge value of votes -->
+
+    <script>
+  let upp = $(".upup");
+        let downn = $(".downdown");
+        let votess = $(".votes");
+
+
+for (let i = 0 ; i<upp.length ; i++){
+    if (upp[i].getAttribute("aria-pressed") == "true") {
+
+        upp[i].style.color = "#79879F"  
+
+          
+        }else{
+        upp[i].style.color = "white"
+
+        }
+      
+      }
+
+      for (let i = 0 ; i<downn.length ; i++){
+    if (downn[i].getAttribute("aria-pressed") == "true") {
+        downn[i].style.color = "#79879F"  
+
+          
+        }else{
+        downn[i].style.color = "white"
+
+        }
+      
+      }
+
+      
+
+</script>
+
+
+
+
 
 
 <!-- up / down vote script  -->
     <script>
-        let up = document.querySelector(".upup")
-        let down = document.querySelector(".downdown")
+        let up = $(".upup");
+        let down = $(".downdown");
+        let votes = $(".votes");
 
-        // let num = $("p.boutn").text()
+        function checkup(id,upvotes,downvotes,test, user){
+
+            for (let i = 0 ; i<up.length ; i++){
+
+            if (up[i].getAttribute("aria-pressed") == "false") {
+                if(down[i].getAttribute("aria-pressed") == "false"){
+                 
+                   if (up[i] == test){
+
+                   votes[i].innerHTML = Number(votes[i].innerHTML) + 1;
+
+                    up[i].setAttribute("aria-pressed", true)
+                up[i].style.color = "#79879F"                
+
+                $.post( 'up.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
+       function( response ) {
+        //  alert(response);
+        
+       }
+    );
+}
+    
+}
+
+                 else  {
+
+                   if (up[i] == test){
+
+                    up[i].setAttribute("aria-pressed", true)
+                up[i].style.color = "#79879F"
+                
+                down[i].setAttribute("aria-pressed", false)
+                down[i].style.color = "white"
+
+                   votes[i].innerHTML = Number(votes[i].innerHTML) + 2;
+
+                $.post( 'up-down.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
+       function( response ) {
+        //  alert(response);
+       }
+    );
+}            
+                }
+            }else  if (up[i].getAttribute("aria-pressed") == "true") {
+                
+                if (up[i] == test){
+                up[i].setAttribute("aria-pressed", false)
+                up[i].style.color = "white"
+                  votes[i].innerHTML = Number(votes[i].innerHTML) - 1;
+                $.post( 'up-.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes,user_id : user}, 
+       function( response ) {
+        //  alert(response);
+       }
+    );
+
+}          
+
+}      
+  }
+        }
+    
 
         
+        function checkdown(id,upvotes,downvotes, test , user){
+            for (let i = 0 ; i<down.length ; i++){  
+            if (down[i].getAttribute("aria-pressed") == "false") {
+                if(up[i].getAttribute("aria-pressed") == "false"){
+                   if (down[i] == test){
+                    down[i].setAttribute("aria-pressed", true)
+                down[i].style.color = "#79879F"
+                votes[i].innerHTML = Number(votes[i].innerHTML) - 1;
+                $.post( 'down.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
+       function( response ) {
+        //  alert(response);
+       }
+    );
+}
+                   } else {
 
-        $(up).click(function () {
-        let upval = up.getAttribute("aria-pressed")
-        let downval = down.getAttribute("aria-pressed")
+                   if (down[i] == test){
+                    up[i].setAttribute("aria-pressed", false)
+                up[i].style.color = "white"
+                down[i].setAttribute("aria-pressed", true)
+                down[i].style.color = "#79879F"
+                votes[i].innerHTML = Number(votes[i].innerHTML) - 2;
+                $.post( 'down-up.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
+       function( response ) {
+        //  alert(response);
+       }
+    );
 
-            if (upval == "false") {
-                
-                down.setAttribute("aria-pressed", false)
-                down.style.color = "white"
+                   }
 
-                up.setAttribute("aria-pressed", true)
-                up.style.color = "#79879F"
-                return false;
             }
-            if (upval == "true") {
-                
+         }else if (down[i].getAttribute("aria-pressed") == "true") {
+                 if (down[i] == test){
+                down[i].setAttribute("aria-pressed", false)
+                down[i].style.color = "white"
+                votes[i].innerHTML = Number(votes[i].innerHTML) + 1;
+                $.post( 'down-.php' , {p_id : id , p_upvotes : upvotes, p_downvotes: downvotes, user_id : user }, 
+       function( response ) {
+        //  alert(response);
+       }
+    );
 
-                up.setAttribute("aria-pressed", false)
-                up.style.color = "white"
-                return false;
+            }      
             }
-
-
-        });
-
-        $(down).click(function () {
-        let upval = up.getAttribute("aria-pressed")
-        let downval = down.getAttribute("aria-pressed")
-
-            if (downval == "false") {
-                
-                up.setAttribute("aria-pressed", false)
-                up.style.color = "white"
-
-                down.setAttribute("aria-pressed", true)
-                down.style.color = "#79879F"
-                return false;
-            }
-            if (downval == "true") {
-                
-
-                down.setAttribute("aria-pressed", false)
-                down.style.color = "white"
-                return false;
-            }
-
-
-        });
-
+        }   
+    }
 
 
 
     </script>
 
+    
 
+
+<?php } ?>
 
 
 <!-- refering to post link script  -->
@@ -458,29 +570,6 @@ $user = $result->fetch_assoc();
     });
 </script>
 
-
-<!-- show inputs post script  -->
-<script>
-    inputs = document.getElementById('formpost');
-    showinput = document.getElementById('showinput');
-    bodyy = document.body;
-
-    function showinputs() {
-
-        inputs.style.display = "block";
-        showinput.style.display = "none";
-
-    }
-
-    $(document).mouseup(function(e) {
-    // if the target of the click isn't the container nor a descendant of the container
-    if (!$(inputs).is(e.target) && $(inputs).has(e.target).length === 0) 
-    {
-                 inputs.style.display = "none";
-            showinput.style.display = "block";
-    }
-});
-</script>
 
 
 

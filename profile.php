@@ -217,11 +217,18 @@ if(!isset($_SESSION["username"])){
                         </div>
                         <div class="col-11 ">
 
-                            <div class="d-flex align-items-center" style="margin-top: 1em;">
+                            <div class="d-flex align-items-center bepostic" style="margin-top: 1em;">
+                            <a href="post.php?postid=<?php echo $post['id'] ?>" style="display: none;"></a>
+
                                
                                 <div class="userpic" style="background-image: url('upload/<?php echo $post['user_photo'] ?>');" ></div>
                                 <h3 style="margin: 0.3em;"><?php echo $post['user_username'] ?></h3>
                                 <span>. <?php echo $post['date'] ?></span>
+<div class="d-flex align-items-center postic">
+<a class="boutn" href="updatepost.php?postid=<?php echo $post['id'] ?>"><i class="fas fa-edit"></i></a>
+                        <a class="boutn" href="profile.php?delpost=<?php echo $post['id'] ?>"><i class="fas fa-trash-alt"></i></a>
+</div>
+                                
                             </div>
                             <p class="postcontent"><?php echo $post['title'] ?> </p>
                             <?php if($post['photo']){ ?>
@@ -237,10 +244,8 @@ if(!isset($_SESSION["username"])){
                                 <button class="d-flex align-items-center boutn"><i class="fa fa-share"
                                         ></i>
                                     <span>Share</span></button>
-                                <button class="d-flex align-items-center boutn"><i class="material-icons"
-                                        >report</i><span>Report</span></button>
+                                
 
-                                <a href="post.php?postid=<?php echo $post['id'] ?>" style="display: none;"></a>
 
                             </div>
 

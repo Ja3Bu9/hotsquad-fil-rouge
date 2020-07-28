@@ -218,8 +218,49 @@ if(isset($_SESSION["username"])){
                                 <button class="d-flex align-items-center boutn"><i class="fa fa-share"
                                         style="font-size:2em; margin-right: 0.2em;"></i>
                                     <span>Share</span></button>
-                                <button class="d-flex align-items-center boutn"><i class="material-icons"
-                                        style="font-size:2em; margin-right: 0.2em;">report</i><span>Report</span></button>
+
+
+                                    <?php 
+                                        if($post['user_id'] != $_SESSION['id']){
+                                        ?>
+
+                                    
+                                <button class="d-flex align-items-center boutn login-trigger" data-target="#report<?php echo $post['id'] ?>" data-toggle="modal"><i class="material-icons"
+                                        >report</i><span>Report</span></button>
+
+
+
+<div id="report<?php echo $post['id'] ?>" class="modal fade boutn" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <button data-dismiss="modal" class="close">&times;</button>
+                <h4 class="d-flex justify-content-center">Report This Post ?</h4>
+                
+                <form method="post">
+                    <input type="hidden" name="id" class="username form-control"
+                         value="<?php echo $post['id'] ?>"/>
+                        <input type="hidden" name="reportval" class="username form-control"
+                         value="<?php echo $post['report'] ?>"/>
+                    
+                        <div class="d-flex justify-content-center">
+<button type="button" class=" login" data-dismiss="modal">Close</button>
+
+                        <input class="login btn" name="report" type="submit" value="Report" />
+
+                    </div>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                                    <?php } ?>
+                                
+
                                         <?php } ?>
 
                                 <a href="#" style="display: none;"></a>

@@ -52,12 +52,19 @@
         public $cat_id;
 
 
-        public function deletAPost($conn){
+        public function deletPost($conn){
+            $update_query1 = mysqli_query($conn,"DELETE FROM comments WHERE post_id=$this->id");
 
+            $update_query = mysqli_query($conn,"DELETE FROM post WHERE id=$this->id");
+            $update_query2 = mysqli_query($conn,"DELETE FROM voted WHERE post_id=$this->id AND user_id = $this->user_id");
+
+            
 
         }
 
         public function updatePost($conn){
+
+            $update_query = mysqli_query($conn,"UPDATE post SET title = '" . $this->title . "' , content = '" . $this->content . "', photo = '" . $this->photo . "', cat_id = '" . $this->categ . "' WHERE id = '" . $this->id . "'");
 
 
         }
@@ -322,6 +329,112 @@ $query = "INSERT into `comments` (content, date, user_id, post_id)
 
 
 
+
+
+
+if(isset($_POST["updatepost"])){
+    $post = new POST();
+
+
+    $sqluppost = "SELECT * FROM post WHERE id = '{$_POST['id']}'";
+     $resultuppost = $conn->query($sqluppost);
+                                
+     $uppost = $resultuppost->fetch_assoc();
+
+
+
+
+    $file_name = $_FILES['photo']['name'];
+    $file_type = $_FILES['photo']['type'];
+    $file_size = $_FILES['photo']['size'];
+    $file_tem_loc = $_FILES['photo']['tmp_name'];
+    $file_store = "upload/posts/".$file_name;
+
+    if($file_name){
+
+        
+        $post->photo = $file_name;
+        move_uploaded_file($file_tem_loc, $file_store);
+
+} else{
+    $post->photo = $uppost['photo'];
+
+}
+
+
+
+    $post->id = $_POST['id'];
+
+    $post->title = stripslashes($_REQUEST['title']);
+    $post->title = mysqli_real_escape_string($conn, $post->title); 
+  
+    $post->content = stripslashes($_REQUEST['content']);
+    $post->content = mysqli_real_escape_string($conn, $post->content);
+  
+  
+    $post->categ = stripslashes($_REQUEST['categ']);
+    $post->categ = mysqli_real_escape_string($conn, $post->categ);
+
+
+
+    $post->updatePost($conn);
+
+
+     header("Location: post.php?postid={$_POST['id']}");
+    
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+if (isset($_GET['delpost'])) {
+
+    $post = new POST();
+    $post->id = $_GET['delpost'];
+    $post->user_id = $_SESSION['id'];
+    $res = $post->deletPost($conn);
+
+    header("Location: profile.php");
+    
+
+  }
+
+
+
+if(isset($_POST["report"])){
+
+    $post = new POST();
+
+    $post->id = stripslashes($_REQUEST['id']);
+    $post->id = mysqli_real_escape_string($conn, $post->id); 
+  
+    $post->report = stripslashes($_REQUEST['reportval']);
+    $post->report = mysqli_real_escape_string($conn, $post->report);
+    $post->report = $post->report + 1;
+
+
+
+    $query = "UPDATE post SET report = '" . $post->report . "' WHERE id = '" . $post->id . "'";
+
+  $res = mysqli_query($conn, $query);
+
+  if($res){
+    header("Location: home.php");
+
+  }
+
+}
 
 
 ?>

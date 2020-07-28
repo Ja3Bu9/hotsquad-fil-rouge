@@ -640,3 +640,47 @@ input::placeholder{
     color: springgreen;;
     font-weight: 500;
   }
+  .bepostic{
+    position: relative;
+    i{
+        font-size: 16px;
+        margin-left: 5px;
+    }
+}
+
+.postic{
+    position: absolute;
+    right: 10px;
+    top: 0;
+
+}
+
+
+#report{
+    margin-top: 20px;
+    cursor: auto;
+}
+
+.modal-content {
+    font-weight: bold;
+    background-color: #292E38;
+    
+    border-radius: 5px;
+
+    h4 span{
+        color: #EF8219;
+    }
+   
+}
+
+.login {
+    padding: 6px 20px;
+    border-radius: 10px;
+    background: #D5D5D5;
+    border: none;
+    color: black;
+    font-weight: bold;
+    transition: all .5s;
+    margin-top: 1em;
+    width: 100%;
+}

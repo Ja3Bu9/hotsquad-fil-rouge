@@ -1,3 +1,19 @@
+<?php
+  session_start();
+
+ 
+require('config.php');
+require('class.php');
+
+if(!isset($_SESSION["username"])){
+    header("Location: home.php");
+
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,12 +52,52 @@
 
 
     <div class="container-fluid logobarback d-flex justify-content-start align-items-center ">
-        <a href="#">
+        <a href="home.php">
             <img class="logofilrouge" src="img/logofilrouge.png" alt="logobar" >
         </a>
 
-        <i class="fas fa-search" style="position: absolute;right: 1rem;width: 16px;"></i>
-    </div>
+        <div class="d-flex justify-content-end align-items-center " style="position: absolute;right: 1rem;">
+
+        
+<?php
+
+$sql = "SELECT * FROM user WHERE id = '{$_SESSION[ "id" ]}'";
+$result = $conn->query($sql);
+$user = $result->fetch_assoc();
+            ?>
+<h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
+            
+            <div class="userpicb" style="background-image: url('upload/<?php echo $user['photo'] ?>');" ></div>
+
+              <div class="btn-group">
+                <button type="button" style="background-color: transparent;border: none;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="profile.php">Profile</a>
+                    <a class="dropdown-item" href="logout.php">Disconnect</a>
+                </div>
+              </div>
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+</div>
+
+<?php
+if($_SESSION['role'] == 'user'){
+echo'<div class="nobackoffice" style="display:flex">
+<h1>You are not an Admin </h1>
+
+
+
+</div>';
+}else{ ?>
 
    <div class="nobackoffice">
      <h1>You Cant access to the backoffice</h1>
@@ -114,62 +170,25 @@
                       </tr>
                     </thead>
                     <tbody>
+
+                    <?php 
+
+$sql = "SELECT * FROM category";
+$result = $conn->query($sql);
+while($category = $result->fetch_assoc() ) { 
+
+                    ?>
+
                       <tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center">PUBG</td>
-                        <td><a href=""><i class="fas fa-edit"></i></a></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
+                      <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(upload/categorys/<?php echo $category['photo'] ?>);"></div><span><?php echo $category['name'] ?></span></td>
+
+                        
+                        <td><a href="backoffice%20categories%20update.php?editcategory=<?php echo $category['id'] ?>"><i class="fas fa-edit"></i></a></td>
+                        <td><a href="backoffice%20categories.php?delcategory=<?php echo $category['id'] ?>"><i class="fas fa-trash-alt"></i></a></td>
                       </tr>
                       
-                     
+                      
+<?php } ?>    
                     </tbody>
                   </table>
 
@@ -219,3 +238,4 @@
 </body>
 
 </html>
+<?php } ?>

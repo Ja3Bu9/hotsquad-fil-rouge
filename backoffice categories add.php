@@ -1,3 +1,21 @@
+<?php
+  session_start();
+
+ 
+require('config.php');
+require('class.php');
+
+if(!isset($_SESSION["username"])){
+    header("Location: home.php");
+
+}
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,12 +54,52 @@
 
 
     <div class="container-fluid logobarback d-flex justify-content-start align-items-center ">
-        <a href="#">
+        <a href="home.php">
             <img class="logofilrouge" src="img/logofilrouge.png" alt="logobar" >
         </a>
 
-        <i class="fas fa-search" style="position: absolute;right: 1rem;width: 16px;"></i>
-    </div>
+        <div class="d-flex justify-content-end align-items-center " style="position: absolute;right: 1rem;">
+
+        
+<?php
+
+$sql = "SELECT * FROM user WHERE id = '{$_SESSION[ "id" ]}'";
+$result = $conn->query($sql);
+$user = $result->fetch_assoc();
+            ?>
+<h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
+            
+            <div class="userpicb" style="background-image: url('upload/<?php echo $user['photo'] ?>');" ></div>
+
+              <div class="btn-group">
+                <button type="button" style="background-color: transparent;border: none;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="profile.php">Profile</a>
+                    <a class="dropdown-item" href="logout.php">Disconnect</a>
+                </div>
+              </div>
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+</div>
+
+<?php
+if($_SESSION['role'] == 'user'){
+echo'<div class="nobackoffice" style="display:flex">
+<h1>You are not an Admin </h1>
+
+
+
+</div>';
+}else{ ?>
 
    <div class="nobackoffice">
      <h1>You Cant access to the backoffice</h1>
@@ -92,12 +150,12 @@
                 <div class="modal-content" style="margin-top: 150px;">
                     <div class="modal-body">
                         <h4><span>Add</span> Category</h4>
-                        <form>
-                            <input type="text" name="username" class="username form-control"
-                                placeholder="name" />
-                            <input type="file" name="password" class="password form-control"
-                                placeholder="photo" />
-                            <input class="btn login" type="submit" value="ADD" />
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="text" name="name" class="username form-control"
+                                placeholder="name" required/>
+                            <input type="file" name="photo" class="password form-control"
+                                placeholder="photo" required/>
+                            <input class="btn login" name="addcateg" type="submit" value="ADD" />
                         </form>
                     </div>
                 </div>
@@ -138,3 +196,4 @@
 </body>
 
 </html>
+<?php } ?>

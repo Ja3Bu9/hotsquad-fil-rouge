@@ -4,6 +4,12 @@
 require('config.php');
 require('class.php');
 
+if(!isset($_SESSION["id"])){
+    header("Location: home.php");
+
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,9 +67,9 @@ if(!isset($_SESSION["username"])){
                             <h4><span>LOG</span> IN</h4>
                             <form method="post">
                                 <input type="text" name="username" class="username form-control"
-                                    placeholder="Username" />
+                                    placeholder="Username" required/>
                                 <input type="password" name="password" class="password form-control"
-                                    placeholder="password" />
+                                    placeholder="password" required/>
                                 <input class="btn login" name="log" type="submit" value="Login" />
                             </form>
                         </div>
@@ -86,18 +92,18 @@ if(!isset($_SESSION["username"])){
                             <h4><span>SIGN</span> UP</h4>
                             <form method="post">  
                                 <input type="text" name="firstname" class="username form-control"
-                                    placeholder="Firstname" />
+                                    placeholder="Firstname" required/>
                                 <input type="text" name="lastname" class="username form-control"
-                                    placeholder="Lastname" />
+                                    placeholder="Lastname" required/>
 
                                 <input type="text" name="username" class="username form-control"
-                                    placeholder="Username" />
-                                <input type="email" name="email" class="username form-control" placeholder="Email" />
+                                    placeholder="Username" required/>
+                                <input type="email" name="email" class="username form-control" placeholder="Email" required/>
 
                                 <input type="password" name="password" class="password form-control"
-                                    placeholder="password" />
+                                    placeholder="password" required/>
                                 <input type="password" name="confirmpassword" class="password form-control"
-                                    placeholder="Confirm Password" />
+                                    placeholder="Confirm Password" required/>
 
                                 <input class="btn login" name="reg" type="submit" value="Sign Up"  />
                             </form>

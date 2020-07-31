@@ -211,7 +211,7 @@ body .bg-top {
   text-overflow: ellipsis;
 }
 
-.logbar .userpic {
+.logbar .userpic, .userpicb {
   width: 40px;
   height: 40px;
   margin-left: 10px;

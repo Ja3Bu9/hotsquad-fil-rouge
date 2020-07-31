@@ -71,7 +71,7 @@
     }
 
 
-    class category{
+    class CATEGORY{
         public $id;
         public $name;
         public $photo;
@@ -79,10 +79,30 @@
 
         public function deletCategory($conn){
 
+          $sql = "SELECT * FROM post WHERE cat_id = '$this->id'";
+           $result = $conn->query($sql);
+                                
+         while($post = $result->fetch_assoc() ) {
+
+         $update_query1 = mysqli_query($conn,"DELETE FROM comments WHERE post_id = '{$post["id"]}'");
+        $update_query4 = mysqli_query($conn,"DELETE FROM voted WHERE post_id='{$post["id"]}'");
+
+          $update_query2 = mysqli_query($conn,"DELETE FROM post WHERE id = '{$post["id"]}'");
+
+    
+
+         }
+
+         $update_query3 = mysqli_query($conn,"DELETE FROM category WHERE id = '$this->id'");
+
+
+
+
         }
 
         public function updateCategory($conn){
 
+          $update_query = mysqli_query($conn,"UPDATE category SET name = '" . $this->name . "' , photo = '" . $this->photo . "' WHERE id = '" . $this->id . "'");
 
         }
 
@@ -204,6 +224,7 @@ if (isset($_POST['log'])){
       $_SESSION['date'] = $row['date'];
       $_SESSION['firstname'] = $row['firstname'];
       $_SESSION['lastname'] = $row['lastname'];
+      $_SESSION['role'] = $row['role'];
 
       header("Location: home.php");
      }
@@ -412,6 +433,8 @@ if (isset($_GET['delpost'])) {
 
 
 
+
+
 if(isset($_POST["report"])){
 
     $post = new POST();
@@ -436,5 +459,198 @@ if(isset($_POST["report"])){
 
 }
 
+
+if (isset($_GET['deluser'])) {
+
+    $user = new USER();
+    $user->id = $_GET['deluser'];
+
+    $sql = "SELECT * FROM post WHERE user_id = '$user->id'";
+    $result = $conn->query($sql);
+                                
+   while($post = $result->fetch_assoc() ) {
+    $update_query3 = mysqli_query($conn,"DELETE FROM comments WHERE post_id = '{$post["id"]}'");
+    
+
+   }
+   
+    $update_query3 = mysqli_query($conn,"DELETE FROM comments WHERE user_id=$user->id");
+    $update_query3 = mysqli_query($conn,"DELETE FROM voted WHERE user_id=$user->id");
+
+    $update_query2 = mysqli_query($conn,"DELETE FROM post WHERE user_id=$user->id");
+
+    $update_query = mysqli_query($conn,"DELETE FROM user WHERE id=$user->id");
+
+    header("Location: backoffice%20user.php");
+    
+
+  }
+
+
+
+  if (isset($_GET['postdel'])) {
+
+    $post = new POST();
+    $post->id = $_GET['postdel'];
+    
+    $update_query3 = mysqli_query($conn,"DELETE FROM comments WHERE post_id = $post->id");
+    $update_query3 = mysqli_query($conn,"DELETE FROM voted WHERE post_id=$post->id");
+
+    $update_query2 = mysqli_query($conn,"DELETE FROM post WHERE id=$post->id");
+
+
+
+    header("Location: backoffice%20posts.php");
+    
+
+  }
+
+  if (isset($_GET['delcomment'])) {
+
+    $comment = new COMMENT();
+    $comment->id = $_GET['delcomment'];
+    
+    $update_query3 = mysqli_query($conn,"DELETE FROM comments WHERE id = $comment->id");
+    
+
+
+
+    header("Location: backoffice%20comments.php");
+    
+
+  }
+
+
+
+  if (isset($_GET['delcategory'])) {
+
+    $category = new CATEGORY();
+    $category->id = $_GET['delcategory'];
+    
+    
+    
+
+    $category->deletCategory($conn);
+
+    header("Location: backoffice%20categories.php");
+    
+
+  }
+
+
+
+
+
+  if(isset($_POST["admin"])){
+
+    $user = new USER();
+
+    $user->id = stripslashes($_REQUEST['id']);
+    $user->id = mysqli_real_escape_string($conn, $user->id); 
+  
+    $user->role = stripslashes($_REQUEST['role']);
+    $user->role = mysqli_real_escape_string($conn, $user->role);
+
+
+    if($user->role == 'user' ){
+        $user->role = 'admin';
+    }else{
+        $user->role = 'user';
+    }
+
+
+    $query = "UPDATE user SET role = '" . $user->role . "' WHERE id = '" . $user->id . "'";
+
+  $res = mysqli_query($conn, $query);
+
+  if($res){
+    header("Location: backoffice%20user.php");
+
+  }
+
+}
+
+
+
+
+
+
+if(isset($_POST["updatecategory"])){
+    $categ = new CATEGORY();
+
+    $categ->name = stripslashes($_REQUEST['name']);
+  $categ->name = mysqli_real_escape_string($conn, $categ->name);
+
+  $categ->id = stripslashes($_REQUEST['id']);
+  $categ->id = mysqli_real_escape_string($conn, $categ->id);
+
+  $sqlcateg = "SELECT * FROM category WHERE id = '$categ->id'";
+  $resultcateg = $conn->query($sqlcateg);
+                             
+  $categorig = $resultcateg->fetch_assoc();
+
+
+
+
+ $file_name = $_FILES['photo']['name'];
+ $file_type = $_FILES['photo']['type'];
+ $file_size = $_FILES['photo']['size'];
+ $file_tem_loc = $_FILES['photo']['tmp_name'];
+ $file_store = "upload/categorys/".$file_name;
+
+ if($file_name){
+    
+     $categ->photo = $file_name;
+     move_uploaded_file($file_tem_loc, $file_store);
+
+} else{
+ $categ->photo = $categorig['photo'];
+
+}
+
+$categ->updateCategory($conn);
+
+
+     header("Location: backoffice%20categories.php");
+
+}
+
+
+
+if(isset($_POST["addcateg"])){
+  $categ = new CATEGORY();
+
+  $categ->name = stripslashes($_REQUEST['name']);
+$categ->name = mysqli_real_escape_string($conn, $categ->name);
+
+
+
+$file_name = $_FILES['photo']['name'];
+$file_type = $_FILES['photo']['type'];
+$file_size = $_FILES['photo']['size'];
+$file_tem_loc = $_FILES['photo']['tmp_name'];
+$file_store = "upload/categorys/".$file_name;
+
+
+  
+   $categ->photo = $file_name;
+   move_uploaded_file($file_tem_loc, $file_store);
+
+
+   $query = "INSERT into `category` (photo, name)
+   VALUES ('$categ->photo', '$categ->name')";
+
+$res = mysqli_query($conn, $query);
+if($res){
+
+
+  header("Location: backoffice%20categories.php");
+
+
+}
+
+
+
+}
 
 ?>

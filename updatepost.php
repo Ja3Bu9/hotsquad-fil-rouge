@@ -61,9 +61,9 @@ if(!isset($_SESSION["username"])){
                             <h4><span>LOG</span> IN</h4>
                             <form method="post">
                                 <input type="text" name="username" class="username form-control"
-                                    placeholder="Username" />
+                                    placeholder="Username" required/>
                                 <input type="password" name="password" class="password form-control"
-                                    placeholder="password" />
+                                    placeholder="password" required/>
                                 <input class="btn login" name="log" type="submit" value="Login" />
                                 
                             </form>

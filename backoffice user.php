@@ -1,3 +1,21 @@
+<?php
+  session_start();
+
+ 
+require('config.php');
+require('class.php');
+
+if(!isset($_SESSION["username"])){
+    header("Location: home.php");
+
+}
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,16 +54,59 @@
 
 
     <div class="container-fluid logobarback d-flex justify-content-start align-items-center ">
-        <a href="#">
+        <a href="home.php">
             <img class="logofilrouge" src="img/logofilrouge.png" alt="logobar" >
         </a>
 
-        <i class="fas fa-search" style="position: absolute;right: 1rem;width: 16px;"></i>
+      
+        
+
+        <div class="d-flex justify-content-end align-items-center " style="position: absolute;right: 1rem;">
+
+        
+        <?php
+
+    $sql = "SELECT * FROM user WHERE id = '{$_SESSION[ "id" ]}'";
+$result = $conn->query($sql);
+$user = $result->fetch_assoc();
+                    ?>
+<h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
+                    
+                    <div class="userpicb" style="background-image: url('upload/<?php echo $user['photo'] ?>');" ></div>
+
+                      <div class="btn-group">
+                        <button type="button" style="background-color: transparent;border: none;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="profile.php">Profile</a>
+                            <a class="dropdown-item" href="logout.php">Disconnect</a>
+                        </div>
+                      </div>
+
+
+
+        </div>
+
     </div>
 
-   <div class="nobackoffice">
+
+
+
+
+    </div>
+
+    <?php
+if($_SESSION['role'] == 'user'){
+    echo'<div class="nobackoffice" style="display:flex">
+    <h1>You are not an Admin </h1>
+        
+
+
+  </div>';
+}else{ ?>
+   <div class="nobackoffice" >
      <h1>You Cant access to the backoffice</h1>
    </div>
+
 
 
     <div class="backoffice">
@@ -115,138 +176,56 @@
                       </tr>
                     </thead>
                     <tbody>
+
+
+                    <?php 
+
+$sql = "SELECT * FROM user";
+$result = $conn->query($sql);
+while($user = $result->fetch_assoc() ) { 
+                    ?>
                       <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
+                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(upload/<?php echo $user['photo'] ?>);"></div><span><?php echo $user['firstname'].' '.  $user['lastname'] ?></span></td>
+                        <td >Ja3bu9</td>
+                        <td><input data-target="#report<?php echo $user['id'] ?>" data-toggle="modal" type="checkbox" <?php if($user['role'] == 'admin'){ echo'checked'; } ?>>
+                        
+                        
+                    
+
+<div id="report<?php echo $user['id'] ?>" class="modal fade boutn" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <button data-dismiss="modal" class="close">&times;</button>
+                <h4 class="d-flex justify-content-center">Change settings ?</h4>
+                
+                <form method="post">
+                    <input type="hidden" name="id" class="username form-control"
+                         value="<?php echo $user['id'] ?>"/>
+                        <input type="hidden" name="role" class="username form-control"
+                         value="<?php echo $user['role'] ?>"/>
+                    
+                        <div class="d-flex justify-content-center">
+<button type="button" class=" login" data-dismiss="modal">Close</button>
+
+                        <input class="login btn" name="admin" type="submit" value="YES" />
+
+                    </div>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+                        
+                        
+                        </td>
+                        <td><a href="backoffice%20user.php?deluser=<?php echo $user['id'] ?>"><i class="fas fa-trash-alt"></i></a></td>
                       </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr><tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(img/hababa.jpg);"></div><span>sami hababa</span></td>
-                        <td>Ja3bu9</td>
-                        <td><input type="checkbox"></td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
+                      
+<?php } ?>
+
                     </tbody>
                   </table>
                
@@ -290,3 +269,5 @@
 </body>
 
 </html>
+
+<?php } ?>

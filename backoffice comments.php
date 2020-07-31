@@ -1,3 +1,20 @@
+<?php
+  session_start();
+
+ 
+require('config.php');
+require('class.php');
+
+if(!isset($_SESSION["username"])){
+    header("Location: home.php");
+
+}
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,12 +53,53 @@
 
 
     <div class="container-fluid logobarback d-flex justify-content-start align-items-center ">
-        <a href="#">
+        <a href="home.php">
             <img class="logofilrouge" src="img/logofilrouge.png" alt="logobar" >
         </a>
 
-        <i class="fas fa-search" style="position: absolute;right: 1rem;width: 16px;"></i>
+        
+        <div class="d-flex justify-content-end align-items-center " style="position: absolute;right: 1rem;">
+
+        
+        <?php
+
+    $sql = "SELECT * FROM user WHERE id = '{$_SESSION[ "id" ]}'";
+$result = $conn->query($sql);
+$user = $result->fetch_assoc();
+                    ?>
+<h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
+                    
+                    <div class="userpicb" style="background-image: url('upload/<?php echo $user['photo'] ?>');" ></div>
+
+                      <div class="btn-group">
+                        <button type="button" style="background-color: transparent;border: none;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="profile.php">Profile</a>
+                            <a class="dropdown-item" href="logout.php">Disconnect</a>
+                        </div>
+                      </div>
+
+
+
+        </div>
+
     </div>
+
+
+
+
+
+    </div>
+
+    <?php
+if($_SESSION['role'] == 'user'){
+    echo'<div class="nobackoffice" style="display:flex">
+    <h1>You are not an Admin </h1>
+        
+
+
+  </div>';
+}else{ ?>
 
    <div class="nobackoffice">
      <h1>You Cant access to the backoffice</h1>
@@ -114,67 +172,21 @@
                       </tr>
                     </thead>
                     <tbody>
+
+                    <?php 
+
+$sql = "SELECT comments.*, user.username AS user_username FROM comments JOIN user ON comments.user_id = user.id";
+
+$result = $conn->query($sql);
+while($comment = $result->fetch_assoc() ) { 
+                    ?>
                       <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
+                        <td class="d-flex justify-content-center align-items-center"><?php echo $comment['content'] ?> </td>
+                        <td><?php echo $comment['user_username'] ?></td>
+                        <td><a href="backoffice%20comments.php?delcomment=<?php echo $comment['id'] ?>"><i class="fas fa-trash-alt"></i></a></td>
                       </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td class="d-flex justify-content-center align-items-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi, corrupti deleniti facilis mollitia iusto provident earum natus neque autem, ex rem laborum repudiandae. Rerum doloribus perferendis sint fugit placeat.</td>
-                        <td>Ja3bu9</td>
-                        <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                     
+                      
+<?php } ?>
                     </tbody>
                   </table>
                
@@ -218,3 +230,4 @@
 </body>
 
 </html>
+<?php } ?>

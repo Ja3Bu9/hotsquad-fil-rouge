@@ -4,8 +4,19 @@ require('class.php');
  
 if(isset($_POST)){
  
+    $postup = "SELECT * FROM post WHERE id = '{$_POST['p_id']}'";
+    
+    $resuu = $conn->query($postup);
+              
+    $postupp = $resuu->fetch_assoc();
 
-$upvotes = $_POST['p_upvotes'] -1;
+
+
+$upvotes = $postupp['upvotes'] -1;
+
+
+
+// $upvotes = $_POST['p_upvotes'] -1;
 $sqlpost = "UPDATE post SET upvotes = '$upvotes' WHERE id = '{$_POST['p_id']}'";
 
  $resultpost = $conn->query($sqlpost);

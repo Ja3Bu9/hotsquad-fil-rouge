@@ -3,10 +3,16 @@ require('config.php');
 require('class.php');
  
 if(isset($_POST)){
+
+    $postdown = "SELECT * FROM post WHERE id = '{$_POST['p_id']}'";
+    
+    $resuu = $conn->query($postdown);
+              
+    $postdownn = $resuu->fetch_assoc();
  
 
-$upvotes = $_POST['p_upvotes'] - 1;
-$downvotes = $_POST['p_downvotes'] + 1;
+$upvotes = $postdownn['upvotes'] - 1;
+$downvotes = $postdownn['downvotes'] + 1;
 
 $sqlpost = "UPDATE post SET upvotes = '$upvotes', downvotes = '$downvotes' WHERE id = '{$_POST['p_id']}'";
 

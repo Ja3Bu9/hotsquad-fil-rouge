@@ -254,6 +254,7 @@ body .bg-top {
   color: white;
   background-color: transparent;
   border: none;
+  outline: none;
 }
 
 .bg .row button:hover {

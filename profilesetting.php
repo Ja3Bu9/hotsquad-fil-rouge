@@ -118,7 +118,7 @@ if(!isset($_SESSION["username"])){
                     ?>
 <h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
                     
-                    <div class="userpic" style="background-image: url('upload/<?php echo $user['photo'] ?>');" ></div>
+                    <div class="userpic" style="background-image: url('upload/user/<?php echo $user['photo'] ?>');" ></div>
 
                       <div class="btn-group">
                         <button type="button" style="background-color: transparent;border: none;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -275,7 +275,7 @@ if(!isset($_SESSION["username"])){
                     <div class="row container-fluid profile">
 
                             <div class="col-5 d-flex flex-column align-items-center">
-                                    <div class="userpicture" style="background-image: url('upload/<?php echo $user['photo'] ?>');">
+                                    <div class="userpicture" style="background-image: url('upload/user/<?php echo $user['photo'] ?>');">
 
                                     </div>
                                     <h3><?php echo $user['username'] ?></h3>
@@ -360,8 +360,15 @@ if(!isset($_SESSION["username"])){
                     <div class="bg categ" style="padding-bottom: 10px; margin: 0;background-color: #292E38;">
                         <div class="row  d-flex justify-content-center align-items-center">
                            
+                        <?php
+
+$sqladsense = "SELECT * FROM ad WHERE name = 'adsense'";
+$resultadsense = $conn->query($sqladsense);
+$adsense = $resultadsense->fetch_assoc();
+                ?>
                             <!-- Google ADS -->
-                            <img src="img/adsgoogle.png" alt="ads" style="width: 300px;">
+                            <!-- <img src="img/adsgoogle.png" alt="ads" style="width: 300px;"> -->
+                            <?php echo $adsense['content'] ?>
                         </div>
                         
                     </div>
@@ -439,7 +446,7 @@ if(isset($_POST["editimg"])){
     $file_type = $_FILES['image']['type'];
     $file_size = $_FILES['image']['size'];
     $file_tem_loc = $_FILES['image']['tmp_name'];
-    $file_store = "upload/".$file_name;
+    $file_store = "upload/user/".$file_name;
 
     move_uploaded_file($file_tem_loc, $file_store);
 

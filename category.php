@@ -116,7 +116,7 @@ $user = $result->fetch_assoc();
                     ?>
 <h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
                     
-                    <div class="userpic" style="background-image: url('upload/<?php echo $user['photo'] ?>');" ></div>
+                    <div class="userpic" style="background-image: url('upload/user/<?php echo $user['photo'] ?>');" ></div>
 
                       <div class="btn-group">
                         <button type="button" style="background-color: transparent;border: none;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -219,7 +219,7 @@ $user = $result->fetch_assoc();
 
                             <div class="d-flex align-items-center" style="margin-top: 1em;">
                                
-                                <div class="userpic" style="background-image: url('upload/<?php echo $post['user_photo'] ?>');" ></div>
+                                <div class="userpic" style="background-image: url('upload/user/<?php echo $post['user_photo'] ?>');" ></div>
                                 <h3 style="margin: 0.3em;"><?php echo $post['user_username'] ?></h3>
                                 <span>. <?php echo $post['date'] ?></span>
                             </div>
@@ -234,9 +234,9 @@ $user = $result->fetch_assoc();
                                 <button class="d-flex align-items-center"><i class='fas fa-comment-alt'
                                         ></i>
                                     <span>Comments</span></button>
-                                <button class="d-flex align-items-center boutn"><i class="fa fa-share"
+                                    <a href="http://www.facebook.com/sharer.php?u=www.google.com" target="_blank" class="d-flex align-items-center boutn"><i class="fa fa-share"
                                         ></i>
-                                    <span>Share</span></button>
+                                    <span>Share</span></a>
                                 
                                     <?php if(isset($_SESSION["id"])){ 
                                         if($post['user_id'] != $_SESSION['id']){
@@ -381,8 +381,15 @@ $user = $result->fetch_assoc();
                     <div class="bg categ" style="padding-bottom: 10px; margin: 0;background-color: #292E38;">
                         <div class="row  d-flex justify-content-center align-items-center">
                            
+                        <?php
+
+$sqladsense = "SELECT * FROM ad WHERE name = 'adsense'";
+$resultadsense = $conn->query($sqladsense);
+$adsense = $resultadsense->fetch_assoc();
+                ?>
                             <!-- Google ADS -->
-                            <img src="img/adsgoogle.png" alt="ads" style="width: 300px;">
+                            <!-- <img src="img/adsgoogle.png" alt="ads" style="width: 300px;"> -->
+                            <?php echo $adsense['content'] ?>
                         </div>
                         
                     </div>

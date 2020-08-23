@@ -120,7 +120,7 @@ if(!isset($_SESSION["username"])){
                     ?>
 <h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
                     
-                    <div class="userpic" style="background-image: url('upload/<?php echo $user['photo'] ?>');" ></div>
+                    <div class="userpic" style="background-image: url('upload/user/<?php echo $user['photo'] ?>');" ></div>
 
                       <div class="btn-group">
                         <button type="button" style="background-color: transparent;border: none;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -227,7 +227,7 @@ if(!isset($_SESSION["username"])){
                             <a href="post.php?postid=<?php echo $post['id'] ?>" style="display: none;"></a>
 
                                
-                                <div class="userpic" style="background-image: url('upload/<?php echo $post['user_photo'] ?>');" ></div>
+                                <div class="userpic" style="background-image: url('upload/user/<?php echo $post['user_photo'] ?>');" ></div>
                                 <h3 style="margin: 0.3em;"><?php echo $post['user_username'] ?></h3>
                                 <span>. <?php echo $post['date'] ?></span>
 <div class="d-flex align-items-center postic">
@@ -366,8 +366,15 @@ if(!isset($_SESSION["username"])){
                     <div class="bg categ" style="padding-bottom: 10px; margin: 0;background-color: #292E38;">
                         <div class="row  d-flex justify-content-center align-items-center">
                            
+                        <?php
+
+$sqladsense = "SELECT * FROM ad WHERE name = 'adsense'";
+$resultadsense = $conn->query($sqladsense);
+$adsense = $resultadsense->fetch_assoc();
+                ?>
                             <!-- Google ADS -->
-                            <img src="img/adsgoogle.png" alt="ads" style="width: 300px;">
+                            <!-- <img src="img/adsgoogle.png" alt="ads" style="width: 300px;"> -->
+                            <?php echo $adsense['content'] ?>
                         </div>
                         
                     </div>

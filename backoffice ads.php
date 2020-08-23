@@ -129,22 +129,23 @@ echo'<div class="nobackoffice" style="display:flex">
                 <i class='fas fa-comments' ></i>
                 <h4>Comments</h4>
             </a>
-            <a href="backoffice categories.php" class="d-flex container-fluid justify-content-start align-items-center backcats" style="background: #576173;
-            ">
+            <a href="backoffice categories.php" class="d-flex container-fluid justify-content-start align-items-center backcats" >
                 <i class='fa fa-th-large' ></i>
                 <h4>Categories</h4>
             </a>
-            <a href="backoffice ads.php" class="d-flex container-fluid justify-content-start align-items-center backcats" >
+            
+            <a href="backoffice ads.php" class="d-flex container-fluid justify-content-start align-items-center backcats" style="background: #576173;
+            ">
                 <i class='fas fa-bullhorn' ></i>
                 <h4>Ads</h4>
             </a>
-              
+
             </div>
 
 
 
 
-            <div class="col-10 ";>
+            <div class="col-10 ">
 
 
             
@@ -153,15 +154,30 @@ echo'<div class="nobackoffice" style="display:flex">
 
                 <div class="modal-content" style="margin-top: 150px;">
                     <div class="modal-body">
-                        <h4><span>Add</span> Category</h4>
-                        <form method="post" enctype="multipart/form-data">
-                            <input type="text" name="name" class="username form-control"
-                                placeholder="name" required/>
-                            <input type="file" name="photo" class="password form-control"
-                                placeholder="photo" required/>
-                            <input class="btn login" name="addcateg" type="submit" value="ADD" />
+                        <h4><span>Adsense</span></h4>
+                        <form method="post">
+                            <input type="text" name="content" class="username form-control"
+                                placeholder="script" required/>
+                            <input class="btn login" name="adsense" type="submit" value="Update" />
                         </form>
                     </div>
+
+                    
+                </div>
+
+
+                <div class="modal-content" style="margin-top: 50px;">
+                    <div class="modal-body">
+                        <h4><span>Banner</span> Ad</h4>
+                        <form method="post" enctype="multipart/form-data">
+                            
+                            <input type="file" name="photo" class="password form-control"
+                                placeholder="photo" required/>
+                            <input class="btn login" name="bannerad" type="submit" value="Update" />
+                        </form>
+                    </div>
+
+                    
                 </div>
             </div>
             </div>
@@ -170,9 +186,6 @@ echo'<div class="nobackoffice" style="display:flex">
         
     </div>
 
-    <script>
-      $('#myTable').DataTable();
-      </script>
 
 
 

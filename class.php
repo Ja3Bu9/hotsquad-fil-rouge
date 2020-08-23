@@ -653,4 +653,60 @@ if($res){
 
 }
 
+
+
+
+
+
+
+
+
+
+
+if(isset($_POST["adsense"])){
+  
+
+  $adsense = stripslashes($_REQUEST['content']);
+$adsense = mysqli_real_escape_string($conn, $adsense);
+
+
+
+
+$query = "UPDATE ad SET content = '" . $adsense . "' WHERE name = 'adsense'";
+
+  $res = mysqli_query($conn, $query);
+
+
+
+   header("Location: backoffice%20ads.php");
+
+}
+
+
+if(isset($_POST["bannerad"])){
+  
+
+
+$file_name = $_FILES['photo']['name'];
+$file_type = $_FILES['photo']['type'];
+$file_size = $_FILES['photo']['size'];
+$file_tem_loc = $_FILES['photo']['tmp_name'];
+$file_store = "upload/ads/".$file_name;
+
+
+  
+   
+   move_uploaded_file($file_tem_loc, $file_store);
+
+
+$query = "UPDATE ad SET content = '" . $file_name . "' WHERE name = 'banner'";
+
+  $res = mysqli_query($conn, $query);
+
+
+
+   header("Location: backoffice%20ads.php");
+
+}
+
 ?>

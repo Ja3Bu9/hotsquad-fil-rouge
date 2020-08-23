@@ -72,7 +72,7 @@ $user = $result->fetch_assoc();
                     ?>
 <h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
                     
-                    <div class="userpicb" style="background-image: url('upload/<?php echo $user['photo'] ?>');" ></div>
+                    <div class="userpicb" style="background-image: url('upload/user/<?php echo $user['photo'] ?>');" ></div>
 
                       <div class="btn-group">
                         <button type="button" style="background-color: transparent;border: none;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -137,6 +137,10 @@ if($_SESSION['role'] == 'user'){
                     <i class='fa fa-th-large' ></i>
                     <h4>Categories</h4>
                 </a>
+                <a href="backoffice ads.php" class="d-flex container-fluid justify-content-start align-items-center backcats" >
+                <i class='fas fa-bullhorn' ></i>
+                <h4>Ads</h4>
+            </a>
               
             </div>
 
@@ -185,7 +189,7 @@ $result = $conn->query($sql);
 while($user = $result->fetch_assoc() ) { 
                     ?>
                       <tr>
-                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(upload/<?php echo $user['photo'] ?>);"></div><span><?php echo $user['firstname'].' '.  $user['lastname'] ?></span></td>
+                        <td class="d-flex justify-content-center align-items-center"><div class="userpic" style="background-image: url(upload/user/<?php echo $user['photo'] ?>);"></div><span><?php echo $user['firstname'].' '.  $user['lastname'] ?></span></td>
                         <td >Ja3bu9</td>
                         <td><input data-target="#report<?php echo $user['id'] ?>" data-toggle="modal" type="checkbox" <?php if($user['role'] == 'admin'){ echo'checked'; } ?>>
                         

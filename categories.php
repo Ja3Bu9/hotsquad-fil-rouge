@@ -114,7 +114,7 @@ $user = $result->fetch_assoc();
                     ?>
 <h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
                     
-                    <div class="userpic" style="background-image: url('upload/<?php echo $user['photo'] ?>');" ></div>
+                    <div class="userpic" style="background-image: url('upload/user/<?php echo $user['photo'] ?>');" ></div>
 
                       <div class="btn-group">
                         <button type="button" style="background-color: transparent;border: none;" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>

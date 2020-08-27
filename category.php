@@ -138,7 +138,28 @@ $user = $result->fetch_assoc();
 
         </a>
 
-        <i class="fas fa-search" style="position: absolute;right: 1rem;width: 16px;"></i>
+        <i class="fas fa-search login-trigger" data-target="#search" data-toggle="modal" style="position: absolute;right: 1rem;width: 16px;cursor: pointer;"></i>
+        
+
+            <div id="search" class="modal fade " role="dialog">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button data-dismiss="modal" class="close">&times;</button>
+                            <h4><span>LOG</span> IN</h4>
+                            <form action="search.php" method="POST" >
+                                
+                            <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search">
+                                <!-- <input type="password" name="password" class="password form-control"
+                                    placeholder="password" required/> -->
+                                <input class="btn login" name="search-submit" type="submit" value="Search" />
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 
    
@@ -150,7 +171,7 @@ $user = $result->fetch_assoc();
 
 
     <div class="container creat">
-        <div class="row">
+        <div class="row rev">
             <div class="col-8">
 
             <?php 
@@ -234,6 +255,8 @@ $user = $result->fetch_assoc();
                                 <button class="d-flex align-items-center"><i class='fas fa-comment-alt'
                                         ></i>
                                     <span>Comments</span></button>
+                                <a href="post.php?postid=<?php echo $post['id'] ?>" style="display: none;"></a>
+
                                     <a href="http://www.facebook.com/sharer.php?u=www.google.com" target="_blank" class="d-flex align-items-center boutn"><i class="fa fa-share"
                                         ></i>
                                     <span>Share</span></a>
@@ -278,7 +301,6 @@ $user = $result->fetch_assoc();
 
                                     <?php }} ?>
 
-                                <a href="post.php?postid=<?php echo $post['id'] ?>" style="display: none;"></a>
 
                             </div>
 

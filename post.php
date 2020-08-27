@@ -137,7 +137,28 @@ $user = $result->fetch_assoc();
 
         </a>
 
-        <i class="fas fa-search" style="position: absolute;right: 1rem;width: 16px;"></i>
+        <i class="fas fa-search login-trigger" data-target="#search" data-toggle="modal" style="position: absolute;right: 1rem;width: 16px;cursor: pointer;"></i>
+        
+
+            <div id="search" class="modal fade " role="dialog">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button data-dismiss="modal" class="close">&times;</button>
+                            <h4><span>LOG</span> IN</h4>
+                            <form action="search.php" method="POST" >
+                                
+                            <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search">
+                                <!-- <input type="password" name="password" class="password form-control"
+                                    placeholder="password" required/> -->
+                                <input class="btn login" name="search-submit" type="submit" value="Search" />
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 
    

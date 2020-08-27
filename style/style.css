@@ -432,6 +432,12 @@ input::placeholder {
   .advertise .advertiseimg {
     height: 40vh;
   }
+  .creat .rev {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: reverse !important;
+        -ms-flex-direction: column-reverse !important;
+            flex-direction: column-reverse !important;
+  }
 }
 
 @media (max-width: 770px) {

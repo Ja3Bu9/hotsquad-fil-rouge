@@ -142,7 +142,28 @@ if(!isset($_SESSION["username"])){
 
         </a>
 
-        <i class="fas fa-search" style="position: absolute;right: 1rem;width: 16px;"></i>
+        <i class="fas fa-search login-trigger" data-target="#search" data-toggle="modal" style="position: absolute;right: 1rem;width: 16px;cursor: pointer;"></i>
+        
+
+            <div id="search" class="modal fade " role="dialog">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button data-dismiss="modal" class="close">&times;</button>
+                            <h4><span>LOG</span> IN</h4>
+                            <form action="search.php" method="POST" >
+                                
+                            <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search">
+                                <!-- <input type="password" name="password" class="password form-control"
+                                    placeholder="password" required/> -->
+                                <input class="btn login" name="search-submit" type="submit" value="Search" />
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 
    
@@ -154,7 +175,7 @@ if(!isset($_SESSION["username"])){
 
 
     <div class="container creat">
-        <div class="row">
+        <div class="row rev">
             <div class="col-8">
                 
 
@@ -285,7 +306,7 @@ if(!isset($_SESSION["username"])){
                     <div class="row container-fluid profile">
 
                             <div class="col-5 d-flex flex-column align-items-center">
-                            <div class="userpicture" style="background-image: url('upload/<?php echo $user['photo'] ?>');">
+                            <div class="userpicture" style="background-image: url('upload/user/<?php echo $user['photo'] ?>');">
 
 </div>
                                     <h3><?php echo $user['username'] ?></h3>

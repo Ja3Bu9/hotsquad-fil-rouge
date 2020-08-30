@@ -4,6 +4,8 @@
 require('config.php');
 require('class.php');
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +40,9 @@ require('class.php');
         <div class="d-flex justify-content-end align-items-center">
             
             <?php
-
+$sql = "SELECT * FROM user WHERE id = '{$_SESSION[ "id" ]}'";
+$result = $conn->query($sql);
+$user = $result->fetch_assoc();
 
 if(!isset($_SESSION["username"])){
          
@@ -108,9 +112,6 @@ if(!isset($_SESSION["username"])){
                     
                     <?php
 }else {
-    $sql = "SELECT * FROM user WHERE id = '{$_SESSION[ "id" ]}'";
-$result = $conn->query($sql);
-$user = $result->fetch_assoc();
                     ?>
 <h6 style="margin: 0.3em;"><?php echo $user['username'] ?></h6>
                     
@@ -169,53 +170,52 @@ $user = $result->fetch_assoc();
 
 
     <div class="container creat">
-        <div class="row">
+        <div class="row rev">
             <div class="col-8">
                
-                <!-- Categories -->
+                <!-- Avatar -->
                 <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
                     <div class="row d-flex justify-content-end align-items-center">
                         <div class="col d-flex justify-content-end align-items-center">
                             <hr>
                     </div>
                         <div class="col d-flex justify-content-center align-items-center">
-                            <h1>Categories</h1>
+                            <h1>About Us</h1>
                         </div>
                         <div class="col d-flex justify-content-end align-items-center">
                                 <hr>
                         </div>
                     </div>
                 </div>
+                <div class="bg" style="padding-bottom: 10px; margin: 0;background-color: #292E38;">
                    
-                                    
-                    <div class="bg categ" style="padding-bottom: 10px; margin: 0;background-color: #292E38;">
+                    
+                   
 
-                    <?php 
-                                $sqlcat = "SELECT * FROM category";
-                                $resultcat = $conn->query($sqlcat);
-                                
-        
-                                
-                                while($categ = $resultcat->fetch_assoc() ) {?>
-                        <div class="row  d-flex justify-content-start align-items-center">
-                            <!-- <img class="catpic" src="" alt="pubg"> -->
-                            <div class="catpic " style="background-image: url('upload/categorys/<?php echo $categ['photo'] ?>');"></div>
-                            <a href="category.php?idcateg=<?php echo $categ['id'] ?>"  ><?php echo $categ['name'] ?></a>
+                   
+                       <div class="container">
+                           <h4 style="padding:20px">
+                           <span style="margin-left:4em;">Welcome to HotSquad, your number one forum. We're dedicated to providing you the very best gaming forum. <br>
 
-                        </div>
-                        <hr>
-                        
-                        
-                                <?php }?>
-                        
-                        
-                    </div>
+
+Founded in 2020 by Ja3Bu9, HotSquad has come a long way from its beginnings in YouCode. When Ja3Bu9 first started out, his passion for gaming drove him to start his own forum. <br>
+
+
+We hope you enjoy our space as much as we enjoy it. If you have any questions or comments, please don't hesitate to contact us.
+
+<br>
+Sincerely,
+<br>
+Ja3Bu9
+                           </h4>
+                       </div>
                     
+                 
                     
-                    
+                </div>
                 
-                
-               
+              
+
 
             </div>
 
@@ -225,10 +225,51 @@ $user = $result->fetch_assoc();
             <div class="col-4">
 
 
-                
+            
 
 
-                
+                <!-- categories -->
+                    <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
+                        <div class="row d-flex justify-content-end align-items-center">
+                            <div class="col-5 d-flex justify-content-end align-items-center">
+                                <h1>Categories</h1>
+                            </div>
+                            <div class="col-7 d-flex justify-content-end align-items-center">
+                                    <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg categ" style="padding-bottom: 10px; margin: 0;background-color: #292E38;">
+
+                    <?php 
+                        $sqlcat = "SELECT * FROM category";
+                        $resultcat = $conn->query($sqlcat);
+                        $i = 1;
+
+                        
+                        while($categ = $resultcat->fetch_assoc() ) {
+                            if($i == 5){
+                            break;
+                            }
+                                                ?>
+                        <div class="row  d-flex justify-content-start align-items-center">
+                            <!-- <img class="catpic" src="" alt="pubg"> -->
+                            <div class="catpic " style="background-image: url('upload/categorys/<?php echo $categ['photo'] ?>');"></div>
+                            <a href="category.php?idcateg=<?php echo $categ['id'] ?>" > <?php echo $categ['name'] ?></a>
+
+                        </div>
+                        <hr>
+
+                        <?php
+                    $i++; }
+                    ?>
+                        <div class="d-flex justify-content-center"><a href="categories.php" class="viewall" >VIEW ALL</a></div>
+                        
+                        
+                   
+                        
+                        
+                    </div>
 
                     <!-- google ads -->
                     <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
@@ -244,14 +285,21 @@ $user = $result->fetch_assoc();
                     <div class="bg categ" style="padding-bottom: 10px; margin: 0;background-color: #292E38;">
                         <div class="row  d-flex justify-content-center align-items-center">
                            
+                        <?php
+
+$sqladsense = "SELECT * FROM ad WHERE name = 'adsense'";
+$resultadsense = $conn->query($sqladsense);
+$adsense = $resultadsense->fetch_assoc();
+                ?>
                             <!-- Google ADS -->
-                            <img src="img/adsgoogle.png" alt="ads" style="width: 300px;">
+                            <!-- <img src="img/adsgoogle.png" alt="ads" style="width: 300px;"> -->
+                            <?php echo $adsense['content'] ?>
                         </div>
                         
                     </div>
                     
-                   <!-- pages -->
-                   <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
+                     <!-- pages -->
+                     <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
                         <div class="row justify-content-center">
                                 <div class="col-6">
                                     <div class="col "><a href="about.php">About</a></div>
@@ -314,6 +362,8 @@ $user = $result->fetch_assoc();
 
 
     <img class="bg-top" src="img/bg-top.png" alt="bg-top">
+
+    
 </body>
 
 </html>

@@ -307,8 +307,8 @@ if(isset($_SESSION["username"])){
 
 
 <?php 
-                                $sqlpost = "SELECT post.*, user.id AS user_id, user.photo AS user_photo , user.username AS user_username FROM post JOIN user ON post.user_id = user.id ORDER BY id DESC";
-                                $resultpost = $conn->query($sqlpost);
+      $sqlpost = "SELECT post.*, user.id AS user_id, user.photo AS user_photo , user.username AS user_username FROM post JOIN user ON post.user_id = user.id ORDER BY id DESC";
+           $resultpost = $conn->query($sqlpost);
                                 
                                 
         
@@ -492,18 +492,18 @@ $adsense = $resultadsense->fetch_assoc();
                         
                     </div>
                     
-                    <!-- pages -->
-                    <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
+                     <!-- pages -->
+                     <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
                         <div class="row justify-content-center">
                                 <div class="col-6">
-                                    <div class="col"><a href="">About</a></div>
-                                    <div class="col"><a href="">Terms</a></div>
-                                    <div class="col"><a href="">Help</a></div>
+                                    <div class="col "><a href="about.php">About</a></div>
+                                    <div class="col "><a href="terms.php">Terms</a></div>
+                                    
                                 </div>
                                 <div class="col-6 ">
                                     
-                                    <div class="col"><a href="">Content Policy</a></div>
-                                    <div class="col"><a href="">Privacy Policy</a></div>
+                                   
+                                    <div class="col "><a href="privacy.php">Privacy Policy</a></div>
                                     
                                 </div>
                                 <span>HotSquad Inc © 2020. All rights reserved </span>

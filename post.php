@@ -4,6 +4,11 @@
 require('config.php');
 require('class.php');
 
+if(!isset($_GET["postid"])){
+    header("Location: home.php");
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -424,18 +429,18 @@ $adsense = $resultadsense->fetch_assoc();
                         
                     </div>
                     
-                    <!-- pages -->
-                    <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
+                     <!-- pages -->
+                     <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
                         <div class="row justify-content-center">
                                 <div class="col-6">
-                                    <div class="col"><a href="">About</a></div>
-                                    <div class="col"><a href="">Terms</a></div>
-                                    <div class="col"><a href="">Help</a></div>
+                                    <div class="col "><a href="about.php">About</a></div>
+                                    <div class="col "><a href="terms.php">Terms</a></div>
+                                    
                                 </div>
                                 <div class="col-6 ">
                                     
-                                    <div class="col"><a href="">Content Policy</a></div>
-                                    <div class="col"><a href="">Privacy Policy</a></div>
+                                   
+                                    <div class="col "><a href="privacy.php">Privacy Policy</a></div>
                                     
                                 </div>
                                 <span>HotSquad Inc © 2020. All rights reserved </span>

@@ -282,18 +282,9 @@ $user = $result->fetch_assoc();
 
                 </div>
 
-                <?php } } }?>
-
-
-            </div>
-
-                                       
-
-
-
-
-
-                <!-- No post
+                <?php } }else { ?> 
+                
+                 <!-- No post -->
                 <div class="bg">
                     <div class="row flex-nowrap">
                         <div class="col-1 d-flex flex-column align-items-center"
@@ -309,13 +300,25 @@ $user = $result->fetch_assoc();
 
                         </div>
                         <div class="col-11 d-flex align-items-center">
-                            <p class="postcontent ">No Posts Yet ..</p>
+                            <p class="postcontent ">No Post Found ..</p>
 
 
                         </div>
 
                     </div>
-                </div> -->
+                </div>
+                <?php } } ?>
+
+
+            </div>
+
+                                       
+
+
+
+
+
+               
 
 
 
@@ -400,21 +403,21 @@ $adsense = $resultadsense->fetch_assoc();
 
                 <!-- pages -->
                 <div class="bg " style="padding-top: 10px; padding-bottom: 10px;">
-                    <div class="row justify-content-center">
-                        <div class="col-6">
-                            <div class="col "><a href="#">About</a></div>
-                            <div class="col "><a href="">Terms</a></div>
-                            <div class="col "><a href="">Help</a></div>
+                        <div class="row justify-content-center">
+                                <div class="col-6">
+                                    <div class="col "><a href="about.php">About</a></div>
+                                    <div class="col "><a href="terms.php">Terms</a></div>
+                                    
+                                </div>
+                                <div class="col-6 ">
+                                    
+                                   
+                                    <div class="col "><a href="privacy.php">Privacy Policy</a></div>
+                                    
+                                </div>
+                                <span>HotSquad Inc © 2020. All rights reserved </span>
                         </div>
-                        <div class="col-6 ">
-
-                            <div class="col "><a href="">Content Policy</a></div>
-                            <div class="col "><a href="">Privacy Policy</a></div>
-
-                        </div>
-                        <span>HotSquad Inc © 2020. All rights reserved </span>
                     </div>
-                </div>
             </div>
         </div>
     </div>

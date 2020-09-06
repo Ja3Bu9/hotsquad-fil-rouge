@@ -149,7 +149,7 @@ $user = $result->fetch_assoc();
                     <div class="modal-content">
                         <div class="modal-body">
                             <button data-dismiss="modal" class="close">&times;</button>
-                            <h4><span>LOG</span> IN</h4>
+                            <h4><span>Search</span></h4>
                             <form action="search.php" method="POST" >
                                 
                             <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search">
